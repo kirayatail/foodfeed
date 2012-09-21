@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
+import edu.chl.dat076.foodfeed.model.entity.Recipe;
 
 /**
  * Handles requests for recipes.
@@ -17,8 +20,8 @@ import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
-	
-	private RecipeDao recipeDao;  
+
+	private RecipeDao recipeDao;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(RecipeController.class);
@@ -28,8 +31,9 @@ public class RecipeController {
 	 */
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String list(Model model) {
-		logger.info("Listing recipes.");
-		model.addAttribute("recipes", recipeDao.findAll());
+		List<Recipe> recipes = recipeDao.findAll();
+		logger.info("Listing " + recipes.size() + " recipes.");
+		model.addAttribute("recipes", recipes);
 		return "recipes/list";
 	}
 
@@ -37,12 +41,12 @@ public class RecipeController {
 	 * Shows a recipe
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String show(@PathVariable long id,  Model model)  {
+	public String show(@PathVariable long id, Model model) {
 		logger.info("Showing recipe with ID " + id + ".");
 		model.addAttribute("recipe", recipeDao.findById(id));
 		return "recipes/show";
 	}
-	
+
 	@Autowired
 	public void setRecipeDao(RecipeDao recipeDao) {
 		this.recipeDao = recipeDao;
