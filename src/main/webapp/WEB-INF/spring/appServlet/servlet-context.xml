@@ -34,7 +34,7 @@
 		<beans:property name="password" value="" />
 	</beans:bean>
 
-	<beans:bean id="foodFeedSessionFactory"
+	<beans:bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="database" />
 		<beans:property name="annotatedClasses">
@@ -51,8 +51,13 @@
 		</beans:property>
 	</beans:bean>
 
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+
 	<beans:bean id="recipeDao" class="edu.chl.dat076.foodfeed.model.dao.RecipeDao">
-		<beans:property name="sessionFactory" ref="foodFeedSessionFactory" />
+		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 
 
