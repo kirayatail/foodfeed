@@ -3,6 +3,7 @@ package edu.chl.dat076.foodfeed.model.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.springframework.security.access.annotation.Secured;
 
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 
@@ -31,5 +32,5 @@ public class RecipeDao implements EntityDao<Recipe, Long> {
 	public List<Recipe> findAll() {
 		return sessionFactory.openSession().createQuery("from Recipe").list();
 	}
-	
+
 }
