@@ -13,10 +13,25 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jspx resources 
 		in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jspx" />
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</beans:bean>
+
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles-definitions.xml</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="tilesProperties">
+			<beans:props>
+				<beans:prop key="org.apache.tiles.evaluator.AttributeEvaluator">
+					org.apache.tiles.evaluator.el.ELAttributeEvaluator
+				</beans:prop>
+			</beans:props>
+		</beans:property>
 	</beans:bean>
 
 </beans:beans>
