@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions
+	PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="base" template="/WEB-INF/tiles/base.jspx">
+		<put-attribute name="title" value="Template" />
+		<put-attribute name="header" value="/WEB-INF/tiles/header.jspx" />
+		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jspx" />
+		<put-attribute name="content" value="/WEB-INF/tiles/header.jspx" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jspx" />
+	</definition>
+
+	<definition name="home" extends="base">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jspx" />
+	</definition>
+
+
+	<definition name="recipes/list" extends="base">
+		<put-attribute name="title" value="Recipes" />
+		<put-attribute name="content" value="/WEB-INF/views/recipes/list.jspx" />
+	</definition>
+
+	<definition name="recipes/show" extends="base">
+		<put-attribute name="title" expression="Recipe with ID ${id}" />
+		<put-attribute name="content" value="/WEB-INF/views/recipes/show.jspx" />
+	</definition>
+
+</tiles-definitions>

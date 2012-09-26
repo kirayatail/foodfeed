@@ -4,8 +4,6 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	<h1>Recipes</h1>
-
-	<p>A list of recipes will be shown here.</p>
+	The header
 
 </jsp:root>
