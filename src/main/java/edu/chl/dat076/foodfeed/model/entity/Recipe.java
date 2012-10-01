@@ -1,5 +1,7 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ public class Recipe {
 	
 	private String description;
 
-	
+	private List<Ingredient> ingredients;
 
 	@Id
 	@GeneratedValue
