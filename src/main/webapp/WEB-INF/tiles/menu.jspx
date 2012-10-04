@@ -4,6 +4,13 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	The menu
+	<ul>
+		<spring:url value="/" var="home" />
+		<spring:url value="/recipes" var="recipes" />
+		<spring:url value="/recipes/add" var="addRecipe" />
+		<li><a href="${home}">Home</a></li>
+		<li><a href="${recipes}">Recipes</a></li>
+		<li><a href="${addRecipe}">Add recipe</a></li>
+	</ul>
 
 </jsp:root>
