@@ -15,8 +15,6 @@ public class Ingredient {
 	private long id;
 	
 	private Grocery grocery;
-	
-	private Recipe recipe;
 		
 	private double amount;
 	private String unit;
@@ -34,12 +32,7 @@ public class Ingredient {
 	public void setGrocery(Grocery grocery) {
 		this.grocery = grocery;
 	}
-	public Recipe getRecipe() {
-		return recipe;
-	}
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
+
 	public double getAmount() {
 		return amount;
 	}

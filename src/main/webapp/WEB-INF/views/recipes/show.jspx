@@ -4,8 +4,8 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	<h1>A recipe</h1>
+	<h1>${recipe.name}</h1>
 
-	<p>The contents of a recipe will be shown here with id ${id}</p>
+	<p>${recipe.description}</p>
 
 </jsp:root>

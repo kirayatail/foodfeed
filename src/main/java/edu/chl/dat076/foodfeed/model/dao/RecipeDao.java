@@ -2,6 +2,7 @@ package edu.chl.dat076.foodfeed.model.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
@@ -24,8 +25,10 @@ public class RecipeDao implements EntityDao<Recipe, Long> {
 	}
 
 	public Recipe findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		Recipe recipe = (Recipe) session.get(Recipe.class, id);
+		session.close();
+		return recipe;
 	}
 
 	@SuppressWarnings("unchecked")

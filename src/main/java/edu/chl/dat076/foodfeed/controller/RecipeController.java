@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import edu.chl.dat076.foodfeed.model.entity.Recipe;
 @RequestMapping("/recipes")
 public class RecipeController {
 
+	@Autowired
 	private RecipeDao recipeDao;
 
 	private static final Logger logger = LoggerFactory
@@ -36,6 +38,26 @@ public class RecipeController {
 		model.addAttribute("recipes", recipes);
 		return "recipes/list";
 	}
+	
+	/**
+	 * Form to add a recipe
+	 */
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String addForm(Model model) {
+		logger.info("Showing form to add a Recipe.");
+		model.addAttribute("recipe", new Recipe());
+		return "recipes/add";
+	}
+	
+	/**
+	 * Creates a recipe
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public String add(Model model, @Validated Recipe recipe) {
+		logger.info("Saving a new recipe.");
+		recipeDao.save(recipe);
+		return "redirect:/recipes/" + recipe.getId();
+	}
 
 	/**
 	 * Shows a recipe
@@ -45,11 +67,6 @@ public class RecipeController {
 		logger.info("Showing recipe with ID " + id + ".");
 		model.addAttribute("recipe", recipeDao.findById(id));
 		return "recipes/show";
-	}
-
-	@Autowired
-	public void setRecipeDao(RecipeDao recipeDao) {
-		this.recipeDao = recipeDao;
 	}
 
 }
