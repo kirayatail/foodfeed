@@ -52,8 +52,4 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="recipeDao" class="edu.chl.dat076.foodfeed.model.dao.RecipeDao">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 </beans>
