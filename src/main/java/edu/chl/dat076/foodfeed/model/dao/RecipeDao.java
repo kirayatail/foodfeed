@@ -16,7 +16,7 @@ public class RecipeDao implements EntityDao<Recipe, Long> {
 	private SessionFactory sessionFactory;
 
 	public void save(Recipe recipe) {
-		sessionFactory.openSession().saveOrUpdate(recipe);
+		sessionFactory.getCurrentSession().saveOrUpdate(recipe);
 	}
 
 	public void delete(Recipe recipe) {
@@ -24,15 +24,12 @@ public class RecipeDao implements EntityDao<Recipe, Long> {
 	}
 
 	public Recipe findById(Long id) {
-		Session session = sessionFactory.openSession();
-		Recipe recipe = (Recipe) session.get(Recipe.class, id);
-		session.close();
-		return recipe;
+		return (Recipe) sessionFactory.getCurrentSession().get(Recipe.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Recipe> findAll() {
-		return sessionFactory.openSession().createQuery("from Recipe").list();
+		return (List<Recipe>) sessionFactory.getCurrentSession().createQuery("from Recipe").list();
 	}
 
 }
