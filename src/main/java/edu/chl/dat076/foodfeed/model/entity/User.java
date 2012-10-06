@@ -1,11 +1,12 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 
 @Entity
-public class User {
+public class User implements Serializable {
     
     
     @Id
@@ -13,6 +14,7 @@ public class User {
     
     private String password;
     
+    @OneToMany
     private List<Recipe> recipes;
     
     
