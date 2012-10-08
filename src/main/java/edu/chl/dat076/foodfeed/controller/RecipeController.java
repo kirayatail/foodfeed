@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -43,6 +44,7 @@ public class RecipeController {
 	 * Form to add a recipe
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@Secured("ROLE_USER")
 	public String addForm(Model model) {
 		logger.info("Showing form to add a Recipe.");
 		model.addAttribute("recipe", new Recipe());
@@ -53,6 +55,7 @@ public class RecipeController {
 	 * Creates a recipe
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@Secured("ROLE_USER")
 	public String add(Model model, @Validated Recipe recipe) {
 		logger.info("Saving a new recipe.");
 		recipeDao.save(recipe);
