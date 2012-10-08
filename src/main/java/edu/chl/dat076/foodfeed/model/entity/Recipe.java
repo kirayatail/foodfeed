@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Recipe implements IEntity{
@@ -17,7 +18,8 @@ public class Recipe implements IEntity{
 	private String name;
 	
 	private String description;
-
+        
+        @OneToMany
 	private List<Ingredient> ingredients;
         
         @Override
