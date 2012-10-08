@@ -9,11 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Recipe implements IEntity{
+public class Recipe implements IEntity<Long>{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private String id;
+	private long id;
 
 	private String name;
 	
@@ -23,11 +23,11 @@ public class Recipe implements IEntity{
 	private List<Ingredient> ingredients;
         
         @Override
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -11,9 +11,10 @@ import javax.persistence.*;
  *
  */
 @Entity
-public class Ingredient implements IEntity, Serializable{
+public class Ingredient implements IEntity<Long>, Serializable{
 
-	private String id;
+        @Id
+	private Long id;
 	
         @OneToOne
 	private Grocery grocery;
@@ -21,12 +22,11 @@ public class Ingredient implements IEntity, Serializable{
 	private double amount;
 	private String unit;
 	
-	@Id
         @Override
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Grocery getGrocery() {
@@ -49,6 +49,7 @@ public class Ingredient implements IEntity, Serializable{
 		this.unit = unit;
 	}
         
+        @Override
         public String toString(){
             return grocery.toString()+" "+String.format("%.2f", this.amount)+" "+unit;
         }
