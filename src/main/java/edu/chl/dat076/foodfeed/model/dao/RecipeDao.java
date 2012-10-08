@@ -11,7 +11,7 @@ import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import org.hibernate.Query;
 
 @Repository("recipeDao")
-public class RecipeDao implements EntityDao<Recipe, Long> {
+public class RecipeDao extends AbstractDao<Recipe, Long> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
