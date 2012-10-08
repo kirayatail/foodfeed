@@ -3,6 +3,7 @@ target/
 
 # Netbeans
 src/main/webapp/WEB-INF/glassfish-web.xml
+nb-configuration.xml
 
 # Eclipse
 .settings/

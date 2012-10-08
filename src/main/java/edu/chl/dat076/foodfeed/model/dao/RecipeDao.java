@@ -11,26 +11,32 @@ import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import org.hibernate.Query;
 
 @Repository("recipeDao")
-public class RecipeDao implements EntityDao<Recipe, Long> {
+public class RecipeDao extends AbstractDao<Recipe, Long> {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
         @Override
 	public void save(Recipe recipe) {
-		sessionFactory.getCurrentSession().saveOrUpdate(recipe);
+            Query q = sessionFactory.getCurrentSession().createQuery("update Recipe set id=:id, name=:name, description=:desc where id=:id");
+            q.setParameter("id", recipe.getId());
+            q.setParameter("name", recipe.getName());
+            q.setParameter("description", recipe.getDescription());
+            q.executeUpdate();
 	}
 
         @Override
 	public void delete(Recipe recipe) {
-		Query q = sessionFactory.getCurrentSession().createQuery("delete from Recipe r where id=:rid");
-                q.setParameter("rid", recipe.getId());
-                q.executeUpdate();
+            Query q = sessionFactory.getCurrentSession().createQuery("delete from Recipe r where id=:id");
+            q.setParameter("id", recipe.getId());
+            q.executeUpdate();
 	}
 
         @Override
 	public Recipe findById(Long id) {
-		return (Recipe) sessionFactory.getCurrentSession().get(Recipe.class, id);
+            Query q = sessionFactory.getCurrentSession().createQuery("select r from Recipe r where id=:id");
+            q.setParameter("id", id);
+            return (Recipe) q.list().get(0);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -45,5 +45,9 @@ public class Ingredient {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
+        
+        public String toString(){
+            return grocery.toString()+" "+String.format("%.2f", this.amount)+" "+unit;
+        }
 
 }
