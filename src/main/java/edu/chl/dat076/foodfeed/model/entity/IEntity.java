@@ -4,15 +4,16 @@
  */
 package edu.chl.dat076.foodfeed.model.entity;
 
+import java.io.Serializable;
 import javax.persistence.Id;
 
 /**
  *
  * @author max
  */
-public interface IEntity {
+public interface IEntity<T extends Serializable> {
 
     @Id
-    String getId();
+    public T getId();
     
 }

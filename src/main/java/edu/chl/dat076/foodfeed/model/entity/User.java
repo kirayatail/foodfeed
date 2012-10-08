@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-public class User implements Serializable, IEntity {
+public class User implements Serializable, IEntity<String> {
     
     
     @Id

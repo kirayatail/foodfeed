@@ -3,7 +3,7 @@ package edu.chl.dat076.foodfeed.model.entity;
 import javax.persistence.*;
 
 @Entity
-public class Grocery implements IEntity {
+public class Grocery implements IEntity<String> {
 
     private String id;
     private String description;
