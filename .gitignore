@@ -1,6 +1,9 @@
 # Maven
 target/
 
+# Netbeans
+src/main/webapp/WEB-INF/glassfish-web.xml
+
 # Eclipse
 .settings/
 .project
