@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -18,6 +19,7 @@ public class User implements Serializable {
     
     @NotNull
     @Size(min = 6)
+    @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
     private String password;
     
     @OneToMany
