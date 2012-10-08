@@ -7,12 +7,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 @Entity
 public class User implements Serializable, IEntity<String> {
     
-    
-    @Id
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
     @NotNull
     @Size(min = 1)
     private String username;

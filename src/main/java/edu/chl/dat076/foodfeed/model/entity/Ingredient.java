@@ -20,11 +20,13 @@ public class Ingredient implements IEntity<Long>, Serializable{
 	private Grocery grocery;
 		
 	private double amount;
+        
 	private String unit;
 	
         @Override
 	public Long getId() {
 		return this.id;
+
 	}
 	public void setId(Long id) {
 		this.id = id;
