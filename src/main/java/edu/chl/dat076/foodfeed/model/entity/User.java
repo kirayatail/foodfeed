@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, IEntity {
     
     
     @Id
@@ -29,7 +29,11 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
-
+    
+    @Override
+    public String getId(){
+        return this.username;
+    }
     public void setUsername(String username) {
         this.username = username;
     }

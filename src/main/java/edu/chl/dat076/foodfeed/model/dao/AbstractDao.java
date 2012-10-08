@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.model.dao;
 
+import edu.chl.dat076.foodfeed.model.entity.IEntity;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  * @author Kohina
  */
-public abstract class AbstractDao<T, ID extends Serializable> implements EntityDao<T, ID> {
+public abstract class AbstractDao<T extends IEntity, ID extends Serializable> implements EntityDao<T, ID> {
 
     @Override
     public void save(T entity) {

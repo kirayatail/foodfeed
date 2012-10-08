@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -10,20 +11,22 @@ import javax.persistence.*;
  *
  */
 @Entity
-public class Ingredient {
+public class Ingredient implements IEntity, Serializable{
 
-	private long id;
+	private String id;
 	
+        @OneToOne
 	private Grocery grocery;
 		
 	private double amount;
 	private String unit;
 	
 	@Id
-	public long getId() {
-		return id;
+        @Override
+	public String getId() {
+		return this.id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Grocery getGrocery() {
