@@ -10,47 +10,44 @@ import javax.validation.constraints.Size;
 @Entity
 public class User implements Serializable, IEntity<String> {
     
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-    @NotNull
-    @Size(min = 1)
-    private String username;
-    
-    @NotNull
-    @Size(min = 6)
-    @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
-    private String password;
-    
-    @OneToMany
-    private List<Recipe> recipes;
-    
-    
-    public String getUsername() {
-        return username;
-    }
-    
-    @Override
-    public String getId(){
-        return this.username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
+        private String username;
 
-    public String getPassword() {
-        return password;
-    }
+        private String password;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public List<Recipe> getRecipes() {
-        return recipes;
-    }
-    
-    public void setRecipes(List<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-    
+        private List<Recipe> recipes;
+
+
+        @Id
+        @GeneratedValue(strategy= GenerationType.AUTO)
+        @NotNull
+        @Size(min = 1, message = "The username must consist of at least 1 character")
+        @Override
+        public String getId(){
+            return this.username;
+        }
+        
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        @NotNull
+        @Size(min = 6, message = "The password must consist of at least 6 characters")
+        @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        @OneToMany
+        public List<Recipe> getRecipes() {
+            return recipes;
+        }
+
+        public void setRecipes(List<Recipe> recipes) {
+            this.recipes = recipes;
+        }
+
 }
