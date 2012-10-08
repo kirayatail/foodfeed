@@ -8,23 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Recipe {
+public class Recipe implements IEntity{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Long id;
+	private String id;
 
 	private String name;
 	
 	private String description;
 
 	private List<Ingredient> ingredients;
-
-	public Long getId() {
+        
+        @Override
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
