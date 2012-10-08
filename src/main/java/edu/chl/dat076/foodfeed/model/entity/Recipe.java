@@ -18,7 +18,7 @@ public class Recipe {
 	
 	private String description;
 
-	// private List<Ingredient> ingredients;
+	private List<Ingredient> ingredients;
 
 	public Long getId() {
 		return id;
