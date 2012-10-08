@@ -39,7 +39,7 @@ public class RecipeController {
 		model.addAttribute("recipes", recipes);
 		return "recipes/list";
 	}
-	
+
 	/**
 	 * Form to add a recipe
 	 */
@@ -50,7 +50,7 @@ public class RecipeController {
 		model.addAttribute("recipe", new Recipe());
 		return "recipes/add";
 	}
-	
+
 	/**
 	 * Creates a recipe
 	 */
@@ -58,7 +58,7 @@ public class RecipeController {
 	@Secured("ROLE_USER")
 	public String add(Model model, @Validated Recipe recipe) {
 		logger.info("Saving a new recipe.");
-		recipeDao.save(recipe);
+		recipeDao.create(recipe);
 		return "redirect:/recipes/" + recipe.getId();
 	}
 
@@ -68,7 +68,7 @@ public class RecipeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(@PathVariable long id, Model model) {
 		logger.info("Showing recipe with ID " + id + ".");
-		model.addAttribute("recipe", recipeDao.findById(id));
+		model.addAttribute("recipe", recipeDao.find(id));
 		return "recipes/show";
 	}
 

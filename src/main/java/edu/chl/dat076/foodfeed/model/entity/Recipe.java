@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;

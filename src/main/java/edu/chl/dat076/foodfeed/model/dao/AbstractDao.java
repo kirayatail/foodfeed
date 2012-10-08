@@ -1,35 +1,43 @@
 package edu.chl.dat076.foodfeed.model.dao;
 
-import edu.chl.dat076.foodfeed.model.entity.IEntity;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-/**
- *
- * DAO class responsible for all methods that are common over DAOs
- * 
- * @author Kohina
- */
-public abstract class AbstractDao<T extends IEntity, ID extends Serializable> implements EntityDao<T, ID> {
+public abstract class AbstractDao<T, ID extends Serializable> implements
+        EntityDao<T, ID> {
 
-    @Override
-    public void save(T entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    @PersistenceContext
+    protected EntityManager entityManager;
+    private Class<T> clazz;
+
+    public AbstractDao(Class<T> clazz) {
+        this.clazz = clazz;
     }
 
     @Override
-    public void delete(T entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void create(T t) {
+        entityManager.persist(t);
     }
 
     @Override
-    public T findById(ID id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void delete(T t) {
+        entityManager.remove(t);
+    }
+
+    @Override
+    public T find(ID id) {
+        return entityManager.find(clazz, id);
     }
 
     @Override
     public List<T> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return entityManager.createQuery("from " + clazz.getName(), clazz).getResultList();
     }
-    
+
+    @Override
+    public void update(T t) {
+        entityManager.refresh(t);
+    }
 }
