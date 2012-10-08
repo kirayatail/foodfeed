@@ -1,11 +1,21 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	<h1>Recipes</h1>
+    <h1>Recipes</h1>
 
-	<p>A list of recipes will be shown here.</p>
+    <c:forEach items="${recipes}" var="recipe">
+        <article>
+            <spring:url value="/recipes/{id}" var="recipeLink">
+                <spring:param name="id" value="${recipe.id}" />
+            </spring:url>
+            <h2><a href="${recipeLink}">${recipe.name}</a></h2>
+            <p>${recipe.description}</p>
+        </article>
+    </c:forEach>
+
+    <p>A list of recipes will be shown here.</p>
 
 </jsp:root>
