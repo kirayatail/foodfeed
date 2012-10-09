@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Ingredient implements IEntity<Long>, Serializable{
 
-        
+
 	private Long id;
 	
         private Grocery grocery;
