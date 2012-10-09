@@ -72,4 +72,14 @@ public class RecipeController {
         model.addAttribute("recipe", recipeDao.find(id));
         return "recipes/show";
     }
+    
+    /**
+     * Deletes a recipe
+     */
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable long id, Model model) {
+        logger.info("Deleting recipe with ID " + id + ".");
+        recipeDao.delete(id);
+        return "redirect:/recipes";
+    }
 }
