@@ -25,6 +25,12 @@ public abstract class AbstractDao<T, ID extends Serializable> implements
     public void delete(T t) {
         entityManager.remove(t);
     }
+    
+    @Override
+    public void delete(ID id){
+        entityManager.createQuery("delete e from "+clazz.getName()+" e where e.id="+id, clazz).executeUpdate();
+        
+    }
 
     @Override
     public T find(ID id) {
