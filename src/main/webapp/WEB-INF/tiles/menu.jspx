@@ -2,9 +2,10 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
 	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	xmlns:spring="http://www.springframework.org/tags"
+        xmlns:sec="http://www.springframework.org/security/tags" version="2.0">
 
-	<ul>
+	<ul id="main-menu">
 		<spring:url value="/" var="home" />
 		<spring:url value="/recipes" var="recipes" />
 		<spring:url value="/recipes/add" var="addRecipe" />
@@ -12,5 +13,19 @@
 		<li><a href="${recipes}">Recipes</a></li>
 		<li><a href="${addRecipe}">Add recipe</a></li>
 	</ul>
+        <ul id="user-menu">
+            <sec:authorize access="hasRole('ROLE_USER')">
+                <spring:url value="/user" var="user" />
+		<spring:url value="/logout" var="logout" />
+                <li><a href="${user}">Profile</a></li>
+		<li><a href="${logOut}">Log out</a></li>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <spring:url value="/register" var="register" />
+		<spring:url value="/logoin" var="logout" />
+                <li><a href="${register}">Register</a></li>
+		<li><a href="${logIn}">Log in</a></li>
+            </sec:authorize>
+        </ul>
 
 </jsp:root>
