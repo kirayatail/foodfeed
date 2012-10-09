@@ -1,0 +1,48 @@
+body {
+    background: #70FDFF;
+    padding: 0.5em;
+}
+
+header,
+nav,
+section,
+footer {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+    padding: 1em;
+    width: 960px;
+}
+
+header {
+    border-radius: 1em 1em 0 0;
+}
+
+header,
+footer {
+    background: #e2e2e2;
+}
+
+nav {
+    background: #eee;
+    border-width: 0 1px 1px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 0.5em;
+}
+
+section {
+    border-width: 0 1px;
+}
+
+footer {
+    border-radius: 0 0 1em 1em;
+}
+
