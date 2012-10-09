@@ -21,7 +21,7 @@
         <body>
 
             <header><tiles:insertAttribute name="header" /></header>
-            <nav><tiles:insertAttribute name="menu" /></nav>
+            <nav class="clearfix"><tiles:insertAttribute name="menu" /></nav>
             <section><tiles:insertAttribute name="content" /></section>
             <footer><tiles:insertAttribute name="footer" /></footer>
         </body>

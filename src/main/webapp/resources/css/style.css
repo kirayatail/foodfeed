@@ -38,11 +38,28 @@ nav li {
     margin-right: 0.5em;
 }
 
+#main-menu {
+    float: left;
+}
+
+#user-menu {
+    float: right;
+}
 section {
     border-width: 0 1px;
 }
 
 footer {
     border-radius: 0 0 1em 1em;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
 }
 
