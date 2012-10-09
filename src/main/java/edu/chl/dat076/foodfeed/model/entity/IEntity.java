@@ -11,9 +11,9 @@ import javax.persistence.Id;
  *
  * @author max
  */
-public interface IEntity<T extends Serializable> {
+public interface IEntity<ID extends Serializable> {
 
-    @Id
-    public T getId();
-    
+    public ID getId();
+
+    public void setId(ID id);
 }
