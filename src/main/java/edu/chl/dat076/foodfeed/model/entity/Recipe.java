@@ -19,6 +19,7 @@ public class Recipe implements IEntity<Long>, Serializable{
 
         private String description;
 
+        @OneToMany
         private List<Ingredient> ingredients;
         
         @Id
