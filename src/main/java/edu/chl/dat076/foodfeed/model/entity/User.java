@@ -8,32 +8,38 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name = "FoodfeedUser") // User is a reserved keyword in many databases
 public class User implements Serializable, IEntity<String> {
 
-    private String username;
-    private String password;
-    private List<Recipe> recipes;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @Size(min = 1, message = "The username must consist of at least 1 character")
+    private String username;
+    @NotNull
+    @Size(min = 6, message = "The password must consist of at least 6 characters")
+    @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
+    private String password;
+    @OneToMany
+    private List<Recipe> recipes;
+
     @Override
     public String getId() {
         return this.username;
     }
 
+    @Override
     public void setId(String id) {
         this.username = id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @NotNull
-    @Size(min = 6, message = "The password must consist of at least 6 characters")
-    @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
     public String getPassword() {
         return password;
     }
@@ -42,7 +48,6 @@ public class User implements Serializable, IEntity<String> {
         this.password = password;
     }
 
-    @OneToMany
     public List<Recipe> getRecipes() {
         return recipes;
     }
