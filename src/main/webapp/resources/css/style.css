@@ -45,6 +45,12 @@ nav li {
 #user-menu {
     float: right;
 }
+
+#user-menu li {
+    margin-left: 0.5em;
+    margin-right: 0;
+}
+
 section {
     border-width: 0 1px;
 }
