@@ -14,13 +14,15 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Ingredient implements IEntity<Long>, Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @OneToOne
     private Grocery grocery;
     private double amount;
     private String unit;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Override
     public Long getId() {
         return this.id;
@@ -30,7 +32,6 @@ public class Ingredient implements IEntity<Long>, Serializable {
         this.id = id;
     }
 
-    @OneToOne
     public Grocery getGrocery() {
         return grocery;
     }
