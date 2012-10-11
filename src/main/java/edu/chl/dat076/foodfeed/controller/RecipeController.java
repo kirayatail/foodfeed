@@ -72,7 +72,7 @@ public class RecipeController {
         model.addAttribute("recipe", recipeDao.find(id));
         return "recipes/show";
     }
-    
+
     /**
      * Deletes a recipe
      */
