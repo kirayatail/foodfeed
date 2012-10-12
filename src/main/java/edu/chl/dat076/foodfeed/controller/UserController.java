@@ -45,8 +45,9 @@ public class UserController {
     public String show(@PathVariable long id, Model model) {
         logger.info("showing user with id: "+id);
         model.addAttribute("user", userDao.find(id));
-        return "user/user";
+        return "user/show";
     }
+    
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
