@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.model.dao;
 
+import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,16 +26,20 @@ public abstract class AbstractDao<T, ID extends Serializable> implements
     public void delete(T t) {
         entityManager.remove(t);
     }
-    
+
     @Override
-    public void delete(ID id){
-        entityManager.createQuery("delete e from "+clazz.getSimpleName()+" e where e.id="+id, clazz).executeUpdate();
-        
+    public void delete(ID id) {
+        entityManager.createQuery("delete e from " + clazz.getSimpleName() + " e where e.id=" + id, clazz).executeUpdate();
+
     }
 
     @Override
     public T find(ID id) {
-        return entityManager.find(clazz, id);
+        T t = entityManager.find(clazz, id);
+        if (t == null) {
+            throw new ResourceNotFoundException();
+        }
+        return t;
     }
 
     @Override
