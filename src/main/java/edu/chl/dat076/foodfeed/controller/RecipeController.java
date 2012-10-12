@@ -78,6 +78,32 @@ public class RecipeController {
     }
 
     /**
+     * Form to edit a recipe
+     */
+    @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
+    public String editForm(@PathVariable long id, Model model) {
+        Recipe recipe = recipeDao.find(id);
+        logger.info("Showing form to edit recipe with ID " + recipe.getId() + ".");
+        model.addAttribute("recipe", recipe);
+        return "recipes/edit";
+    }
+
+    /**
+     * Edits a recipe
+     */
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
+    public String edit(Model model, @Validated Recipe recipe, BindingResult result) {
+        if (result.hasErrors()) {
+            return "recipes/edit";
+        }
+        logger.info("Updating recipe with ID " + recipe.getId() + ".");
+        recipeDao.update(recipe);
+        return "redirect:/recipes/" + recipe.getId();
+    }
+
+    /**
      * Deletes a recipe
      */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)

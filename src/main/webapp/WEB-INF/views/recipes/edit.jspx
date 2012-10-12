@@ -1,0 +1,19 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+    <h1>Edit ${recipe.name}</h1>
+
+    <form:form commandName="recipe">
+        <form:label path="name">Name</form:label>
+        <form:errors path="name" element="div" />
+        <form:input path="name" />
+        <form:label path="description">Description</form:label>
+        <form:errors path="description" element="div" />
+        <form:textarea path="description" />
+        <input type="submit" value="Edit" />
+    </form:form>
+
+</jsp:root>
