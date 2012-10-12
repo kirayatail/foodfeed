@@ -50,7 +50,6 @@ public class Recipe implements IEntity<Long>, Serializable {
         this.description = description;
     }
 
-    @OneToMany
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
