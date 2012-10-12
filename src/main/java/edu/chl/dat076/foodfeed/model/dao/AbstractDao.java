@@ -29,8 +29,10 @@ public abstract class AbstractDao<T, ID extends Serializable> implements
 
     @Override
     public void delete(ID id) {
-        entityManager.createQuery("delete e from " + clazz.getSimpleName() + " e where e.id=" + id, clazz).executeUpdate();
-
+        entityManager.createQuery("delete from " + clazz.getSimpleName()
+                + " e where e.id=:id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
