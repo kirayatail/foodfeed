@@ -49,6 +49,6 @@ public abstract class AbstractDao<T, ID extends Serializable> implements
 
     @Override
     public void update(T t) {
-        entityManager.refresh(t);
+        entityManager.merge(t);
     }
 }
