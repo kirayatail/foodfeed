@@ -24,6 +24,11 @@ public class FfUser implements UserDetails {
     private String username;
     
     
+    public FfUser(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> auths = new ArrayList<>();
