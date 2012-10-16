@@ -35,6 +35,9 @@ public class UserController {
         return "redirect:/";
     }
 
+    /*
+     * Form for registering a new user
+     */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String getRegisterForm(Model model) {
         model.addAttribute("user", new User());

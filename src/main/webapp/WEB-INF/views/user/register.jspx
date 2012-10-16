@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="US-ASCII"?>
-<!-- 
-    Document   : register
-    Created on : Oct 12, 2012, 3:05:14 PM
-    Author     : max
--->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-    <jsp:directive.page contentType="text/html" pageEncoding="US-ASCII"/>
+    <h1>Register new user</h1>
 
-    <!-- any content can be specified here, e.g.: -->
-    <jsp:element name="text">
-        <jsp:attribute name="lang">EN</jsp:attribute>
-        <jsp:body>Hello World!</jsp:body>
-    </jsp:element>
+    <form:form commandName="user">
+        <form:label path="username">Name</form:label>
+        <form:errors path="username" element="div" />
+        <form:input path="username" />
+        <form:label path="password">Password</form:label>
+        <form:errors path="password" element="div" />
+        <form:password path="password" />
+        <input type="submit" value="Register user" />
+    </form:form>
 
 </jsp:root>
