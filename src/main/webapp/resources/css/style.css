@@ -24,8 +24,12 @@ footer {
 }
 
 nav {
-    background: #eee;
+    background: -webkit-linear-gradient(top, #dbdbdb 0%,#bcbcbc 100%);
     border-width: 0 1px 1px;
+    font-family: Arial, sans-serif;
+    font-size: 0.75em;
+    padding-left: 1.3em;
+    padding-right: 1.3em;
 }
 
 nav ul {
@@ -36,6 +40,22 @@ nav ul {
 nav li {
     display: inline;
     margin-right: 0.5em;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+nav a:hover{
+    background: -webkit-linear-gradient(top, #bebebe 0%,#848484 100%);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
 #main-menu {
