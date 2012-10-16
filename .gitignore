@@ -12,3 +12,7 @@ nb-configuration.xml
 
 # Spring
 .springBeans
+
+#Testing DB
+FoodFeedDB/
+derby.log
