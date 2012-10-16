@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="US-ASCII"?>
-<!-- 
-    Document   : user
-    Created on : Oct 12, 2012, 3:05:02 PM
-    Author     : max
--->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-    <jsp:directive.page contentType="text/html" pageEncoding="US-ASCII"/>
+    <h1>${user.name}</h1>
 
-    <!-- any content can be specified here, e.g.: -->
-    <jsp:element name="text">
-        <jsp:attribute name="lang">EN</jsp:attribute>
-        <jsp:body>Hello World!</jsp:body>
-    </jsp:element>
+    <!-- The edit page is not implemented, should offer to change password? -->
+    <spring:url value="/user/{id}/edit" var="editLink">
+        <spring:param name="username" value="${user.username}" />
+    </spring:url>
+    <ul class="actions">
+        <li><a href="${editLink}">Edit</a></li>
+    </ul>
 
+    <!-- should display a list of all recipes the user owns, maybe link to a recipe page for crud for recipe? -->
+    <p>${user.recipes}</p>
 </jsp:root>
