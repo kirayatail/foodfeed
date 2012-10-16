@@ -17,10 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Transactional
-public class RecipeDaoTests {
+public class RecipeDaoTest {
+
     @Autowired
     RecipeDao recipeDao;
-    
+
     @Test
     public void testFindAll() {
         List<Recipe> recipes = recipeDao.findAll();
