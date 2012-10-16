@@ -43,6 +43,12 @@
         <put-attribute name="title" expression="Log in" />
         <put-attribute name="content" value="/WEB-INF/views/user/login.jspx" />
     </definition>
+    
+    <definition name="user/register" extends="base">
+        <put-attribute name="title" expression="Register new user" />
+        <put-attribute name="content" value="/WEB-INF/views/user/register.jspx" />
+    </definition>
+    
     <definition name="user/show" extends="base">
         <put-attribute name="title" expression="${user.username}" />
         <put-attribute name="content" value="/WEB-INF/views/user/show.jspx" />

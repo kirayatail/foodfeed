@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  */
 @Controller
+@RequestMapping("/user")
 public class UserController {
     
     @Autowired
@@ -26,7 +27,7 @@ public class UserController {
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String doRegister(Model model, @Validated User usr) {
         logger.info("Registering new user");
         userDao.create(usr);
@@ -44,8 +45,8 @@ public class UserController {
         return "user/register";
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable long id, Model model) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(@PathVariable String id, Model model) {
         logger.info("showing user with id: "+id);
         model.addAttribute("user", userDao.find(id));
         return "user/show";
