@@ -1,11 +1,22 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	<h1>${recipe.name}</h1>
+    <h1>${recipe.name}</h1>
 
-	<p>${recipe.description}</p>
+    <spring:url value="/recipes/{id}/edit" var="editLink">
+        <spring:param name="id" value="${recipe.id}" />
+    </spring:url>
+    <spring:url value="/recipes/{id}/delete" var="deleteLink">
+        <spring:param name="id" value="${recipe.id}" />
+    </spring:url>
+    <ul class="actions">
+        <li><a href="${editLink}">Edit</a></li>
+        <li><a href="${deleteLink}">Delete</a></li>
+    </ul>
+
+    <p>${recipe.description}</p>
 
 </jsp:root>

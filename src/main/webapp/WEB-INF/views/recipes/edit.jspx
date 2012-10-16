@@ -4,7 +4,7 @@
           xmlns:form="http://www.springframework.org/tags/form"
           xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-    <h1>Add a recipe</h1>
+    <h1>Edit ${recipe.name}</h1>
 
     <form:form commandName="recipe">
         <form:label path="name">Name</form:label>
@@ -13,7 +13,7 @@
         <form:label path="description">Description</form:label>
         <form:errors path="description" element="div" />
         <form:textarea path="description" />
-        <input type="submit" value="Add recipe" />
+        <input type="submit" value="Edit" />
     </form:form>
 
 </jsp:root>

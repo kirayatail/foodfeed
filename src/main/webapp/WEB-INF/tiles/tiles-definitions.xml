@@ -6,33 +6,45 @@
 
 <tiles-definitions>
 
-	<definition name="base" template="/WEB-INF/tiles/base.jspx">
-		<put-attribute name="title" value="Template" />
-		<put-attribute name="header" value="/WEB-INF/tiles/header.jspx" />
-		<put-attribute name="menu" value="/WEB-INF/tiles/menu.jspx" />
-		<put-attribute name="content" value="/WEB-INF/tiles/header.jspx" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jspx" />
-	</definition>
+    <definition name="base" template="/WEB-INF/tiles/base.jspx">
+        <put-attribute name="title" value="Template" />
+        <put-attribute name="header" value="/WEB-INF/tiles/header.jspx" />
+        <put-attribute name="menu" value="/WEB-INF/tiles/menu.jspx" />
+        <put-attribute name="content" value="/WEB-INF/tiles/header.jspx" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/footer.jspx" />
+    </definition>
 
-	<definition name="home" extends="base">
-		<put-attribute name="title" value="Home" />
-		<put-attribute name="content" value="/WEB-INF/views/home.jspx" />
-	</definition>
+    <definition name="home" extends="base">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="content" value="/WEB-INF/views/home.jspx" />
+    </definition>
 
 
-	<definition name="recipes/list" extends="base">
-		<put-attribute name="title" value="Recipes" />
-		<put-attribute name="content" value="/WEB-INF/views/recipes/list.jspx" />
-	</definition>
+    <definition name="recipes/list" extends="base">
+        <put-attribute name="title" value="Recipes" />
+        <put-attribute name="content" value="/WEB-INF/views/recipes/list.jspx" />
+    </definition>
 	
-	<definition name="recipes/add" extends="base">
-		<put-attribute name="title" expression="Add a recipe" />
-		<put-attribute name="content" value="/WEB-INF/views/recipes/add.jspx" />
-	</definition>
+    <definition name="recipes/add" extends="base">
+        <put-attribute name="title" expression="Add a recipe" />
+        <put-attribute name="content" value="/WEB-INF/views/recipes/add.jspx" />
+    </definition>
 
-	<definition name="recipes/show" extends="base">
-		<put-attribute name="title" expression="${recipe.name}" />
-		<put-attribute name="content" value="/WEB-INF/views/recipes/show.jspx" />
-	</definition>
+    <definition name="recipes/show" extends="base">
+        <put-attribute name="title" expression="${recipe.name}" />
+        <put-attribute name="content" value="/WEB-INF/views/recipes/show.jspx" />
+    </definition>
+    <definition name="recipes/edit" extends="base">
+        <put-attribute name="title" expression="Edit ${recipe.name}" />
+        <put-attribute name="content" value="/WEB-INF/views/recipes/edit.jspx" />
+    </definition>
 
+    <definition name="user/login" extends="base">
+        <put-attribute name="title" expression="Log in" />
+        <put-attribute name="content" value="/WEB-INF/views/user/login.jspx" />
+    </definition>
+    <definition name="user/show" extends="base">
+        <put-attribute name="title" expression="${user.username}" />
+        <put-attribute name="content" value="/WEB-INF/views/user/show.jspx" />
+    </definition>
 </tiles-definitions>

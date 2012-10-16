@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 
 /**
  * Handles requests for recipes.
@@ -55,9 +56,12 @@ public class RecipeController {
     /**
      * Creates a recipe
      */
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @Secured("ROLE_USER")
-    public String add(Model model, @Validated Recipe recipe) {
+    public String add(Model model, @Validated Recipe recipe, BindingResult result) {
+        if (result.hasErrors()) {
+            return "recipes/add";
+        }
         logger.info("Saving a new recipe.");
         recipeDao.create(recipe);
         return "redirect:/recipes/" + recipe.getId();
@@ -71,6 +75,32 @@ public class RecipeController {
         logger.info("Showing recipe with ID " + id + ".");
         model.addAttribute("recipe", recipeDao.find(id));
         return "recipes/show";
+    }
+
+    /**
+     * Form to edit a recipe
+     */
+    @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
+    public String editForm(@PathVariable long id, Model model) {
+        Recipe recipe = recipeDao.find(id);
+        logger.info("Showing form to edit recipe with ID " + recipe.getId() + ".");
+        model.addAttribute("recipe", recipe);
+        return "recipes/edit";
+    }
+
+    /**
+     * Edits a recipe
+     */
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    @Secured("ROLE_USER")
+    public String edit(Model model, @Validated Recipe recipe, BindingResult result) {
+        if (result.hasErrors()) {
+            return "recipes/edit";
+        }
+        logger.info("Updating recipe with ID " + recipe.getId() + ".");
+        recipeDao.update(recipe);
+        return "redirect:/recipes/" + recipe.getId();
     }
 
     /**
