@@ -8,11 +8,12 @@ import javax.validation.constraints.Size;
 @Entity
 public class Grocery implements IEntity<String>, Serializable {
         
+        @Id
+        @NotNull
         private String id;
         
         private String description;
 
-        @Id
         @Override
         public String getId() {
             return id;
@@ -22,8 +23,6 @@ public class Grocery implements IEntity<String>, Serializable {
             this.id = id;
         }
 
-        @NotNull
-        @Size(min = 1, message = "The description must consist of at least one character")
         public String getDescription() {
             return description;
         }
