@@ -8,11 +8,11 @@
 
     <spring:url value="j_spring_security_check" var="login" />
     <form name='f' action="${login}" method="POST">
-        <label for="j_username" >User name</label>
-        <input type='text' name='j_username' value='' />
+        <label for="j_username" >Username</label>
+        <input type='text' name='j_username' value='' class="textform"/><br/>
         <label for="j_password" >Password</label>
-        <input type='password' name='j_password' value='' />
-        <input type="submit" value="Log in" />
+        <input type='password' name='j_password' value='' class="textform"/><br/>
+        <input type="submit" value="Log in"/>
     </form>
 
 </jsp:root>
