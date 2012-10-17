@@ -22,7 +22,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Grocery grocery;
     @Min(value = 0, message = "Value must be positive")
-    @NumberFormat(pattern=".###")
+    @NumberFormat(style= Style.NUMBER)
     private Double amount;
     private String unit;
 

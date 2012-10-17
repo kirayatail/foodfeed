@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.annotations.Cascade;
 
 @Entity
 public class Recipe implements IEntity<Long>, Serializable {
@@ -61,5 +60,13 @@ public class Recipe implements IEntity<Long>, Serializable {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+    
+    public int getIngredientCount() {
+        if (this.ingredients != null) {
+            return ingredients.size();
+        } else {
+            return 0;
+        }
     }
 }
