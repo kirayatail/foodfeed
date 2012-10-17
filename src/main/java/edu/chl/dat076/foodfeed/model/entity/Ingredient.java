@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 /**
  * Specifies a separate ingredient to be used in relation to recipes.
@@ -20,6 +22,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Grocery grocery;
     @Min(value = 0, message = "Value must be positive")
+    @NumberFormat(pattern=".###")
     private Double amount;
     private String unit;
 
