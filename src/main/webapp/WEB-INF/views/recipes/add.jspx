@@ -13,7 +13,7 @@
         <form:label path="description">Description</form:label>
         <form:errors path="description" element="div" />
         <form:textarea path="description" class="textform"/><br/>
-        <input type="submit" value="Add recipe" />
+        <input type="submit" value="Add recipe" class="button"/>
     </form:form>
 
 </jsp:root>
