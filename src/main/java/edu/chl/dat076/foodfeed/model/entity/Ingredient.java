@@ -56,6 +56,10 @@ public class Ingredient implements IEntity<Long>, Serializable {
     public void setUnit(String unit) {
         this.unit = unit;
     }
+    
+    public String getName() {
+        return this.grocery.getId();
+    }
 
     @Override
     public String toString() {
