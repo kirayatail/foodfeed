@@ -16,8 +16,7 @@ public class User implements Serializable, IEntity<String> {
     @Size(min = 1, message = "The username must consist of at least 1 character")
     private String username;
     @NotNull
-    @Size(min = 6, message = "The password must consist of at least 6 characters")
-    @Pattern(regexp = "[a-zA-Z0-9_\\s\\W]")
+    @Size(min = 3, message = "The password must consist of at least 6 characters")
     private String password;
     @OneToMany
     private List<Recipe> recipes;
