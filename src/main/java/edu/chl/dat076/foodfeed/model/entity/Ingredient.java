@@ -17,10 +17,10 @@ public class Ingredient implements IEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Grocery grocery;
-    private double amount;
+    @Min(value = 0, message = "Value must be positive")
+    private Double amount;
     private String unit;
 
     @Override
@@ -40,12 +40,11 @@ public class Ingredient implements IEntity<Long>, Serializable {
         this.grocery = grocery;
     }
 
-    @Min(value = 0, message = "Value must be positive")
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

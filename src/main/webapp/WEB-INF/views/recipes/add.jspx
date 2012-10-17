@@ -14,6 +14,17 @@
         <form:errors path="description" element="div" />
         <form:textarea path="description" class="textform"/><br/>
         <input type="submit" value="Add recipe" class="button"/>
+        <h2>Ingredients</h2>
+        <form:label path="ingredients[0].grocery.id">Name</form:label>
+        <form:errors path="ingredients[0].grocery.id" />
+        <form:input path="ingredients[0].grocery.id" />
+        <form:label path="ingredients[0].amount">Amount</form:label>
+        <form:errors path="ingredients[0].amount" />
+        <form:input path="ingredients[0].amount" />
+        <form:label path="ingredients[0].unit">Unit</form:label>
+        <form:errors path="ingredients[0].unit" />
+        <form:input path="ingredients[0].unit" />
+        <input type="submit" value="Add recipe" />
     </form:form>
 
 </jsp:root>
