@@ -4,6 +4,7 @@
  */
 package edu.chl.dat076.foodfeed.services;
 
+import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import edu.chl.dat076.foodfeed.model.dao.UserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
 import edu.chl.dat076.foodfeed.model.security.FfUser;
@@ -23,7 +24,12 @@ public class FfUserDetailsService implements UserDetailsService {
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User usr = ud.find(username);
+        User usr;
+        try {
+            usr = ud.find(username);
+        } catch(ResourceNotFoundException exc){
+            throw new UsernameNotFoundException(username);            
+        }
         
         return new FfUser(usr.getId(), usr.getPassword());
     }
