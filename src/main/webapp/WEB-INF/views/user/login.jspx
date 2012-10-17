@@ -12,7 +12,7 @@
         <input type='text' name='j_username' value='' class="textform"/><br/>
         <label for="j_password" >Password</label>
         <input type='password' name='j_password' value='' class="textform"/><br/>
-        <input type="submit" value="Log in"/>
+        <input type="submit" value="Log in" class="button"/>
     </form>
 
 </jsp:root>

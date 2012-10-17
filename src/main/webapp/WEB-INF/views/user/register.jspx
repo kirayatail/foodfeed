@@ -13,7 +13,7 @@
         <form:label path="password">Password</form:label>
         <form:errors path="password" element="div" />
         <form:password path="password" class="textform"/><br/>
-        <input type="submit" value="Register user" />
+        <input type="submit" value="Register user" class="button"/>
     </form:form>
 
 </jsp:root>
