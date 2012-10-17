@@ -13,7 +13,6 @@ public class Grocery implements IEntity<String>, Serializable {
         private String description;
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
         @Override
         public String getId() {
             return id;
