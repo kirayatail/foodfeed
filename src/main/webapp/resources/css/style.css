@@ -1,6 +1,7 @@
 body {
     background: #d0f4ff;
     padding: 0.5em;
+    font-family: Arial, sans-serif;
 }
 
 header,
@@ -26,7 +27,6 @@ footer {
 nav {
     background: -webkit-linear-gradient(top, #dbdbdb 0%,#bcbcbc 100%);
     border-width: 0 1px 1px;
-    font-family: Arial, sans-serif;
     font-size: 0.75em;
     padding-left: 1.3em;
     padding-right: 1.3em;
@@ -89,3 +89,37 @@ footer {
     clear: both;
 }
 
+.textform, textarea {
+	padding: 5px;
+	border: solid 1px #b0b0b0;
+	outline: 0;
+	font: normal 0.75em Verdana, Tahoma, sans-serif;
+	width: 200px;
+	background: #FFFFFF;
+        -webkit-box-shadow: rgba(0,0,0, 0.15) 0px 0px 8px;
+        margin-bottom: 0.5em;
+}
+
+textarea {
+	width: 400px;
+	max-width: 400px;
+	height: 150px;
+	line-height: 150%;
+}
+
+.textform:hover, textarea:hover,
+.textform:focus, textarea:focus {
+	border-color: #C9C9C9;
+}
+
+label {
+	margin-left: 10px;
+	color: #000000;
+        display: inline-block;
+        margin-left: 0;
+        margin-right: 0.4em;
+        width: 6em;
+        text-align: right;
+        font-size: 0.8em;
+        font-weight: bold;
+}
