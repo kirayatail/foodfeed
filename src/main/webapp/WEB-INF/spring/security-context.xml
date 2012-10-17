@@ -9,7 +9,7 @@
                             proxy-target-class="false" />
 
     <http use-expressions="true" auto-config="true">
-        <form-login login-page="/login"/>
+        <form-login login-page="/user/login"/>
         <logout invalidate-session="true" logout-success-url="/"
                 logout-url="/logout" />
     </http>
