@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
@@ -26,6 +27,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     @Size(min = 1, message = "The description must consist of at least one character")
     private String description;
     @OneToMany(cascade = CascadeType.ALL)
+    @Valid
     private List<Ingredient> ingredients;
 
     @Override
