@@ -21,8 +21,8 @@
 		<li><a href="${logout}">Log out</a></li>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
-                <spring:url value="/register" var="register" />
-		<spring:url value="/login" var="login" />
+                <spring:url value="/user/register" var="register" />
+		<spring:url value="/user/login" var="login" />
                 <li><a href="${register}">Register</a></li>
 		<li><a href="${login}">Log in</a></li>
             </sec:authorize>
