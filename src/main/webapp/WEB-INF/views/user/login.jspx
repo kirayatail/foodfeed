@@ -6,7 +6,7 @@
 
     <h1>Log in</h1>
 
-    <spring:url value="j_spring_security_check" var="login" />
+    <spring:url value="../j_spring_security_check" var="login" />
     <form name='f' action="${login}" method="POST">
         <label for="j_username" >Username</label>
         <input type='text' name='j_username' value='' class="textform"/><br/>
