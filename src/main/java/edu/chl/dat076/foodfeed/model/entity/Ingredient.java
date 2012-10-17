@@ -2,6 +2,7 @@ package edu.chl.dat076.foodfeed.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.NumberFormat;
@@ -20,8 +21,11 @@ public class Ingredient implements IEntity<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @Valid
     private Grocery grocery;
     @Min(value = 0, message = "Value must be positive")
+    @NotNull
     @NumberFormat(style= Style.NUMBER)
     private Double amount;
     private String unit;
