@@ -9,10 +9,10 @@
     <form:form commandName="recipe">
         <form:label path="name">Name</form:label>
         <form:errors path="name" element="div" />
-        <form:input path="name" />
+        <form:input path="name" class="textform"/><br/>
         <form:label path="description">Description</form:label>
         <form:errors path="description" element="div" />
-        <form:textarea path="description" />
+        <form:textarea path="description" class="textform"/><br/>
         <input type="submit" value="Edit" class="button"/>
     </form:form>
 
