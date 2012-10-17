@@ -1,5 +1,6 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
           xmlns:tiles="http://tiles.apache.org/tags-tiles"
           xmlns:form="http://www.springframework.org/tags/form"
           xmlns:spring="http://www.springframework.org/tags" version="2.0">
@@ -23,7 +24,8 @@
     <ul>
         <c:forEach items="${recipe.ingredients}" var="ingredient">
             <li>
-                ${ingredient.amount} ${ingredient.unit}
+                <fmt:formatNumber value="${ingredient.amount}" type="number" />
+                ${ingredient.unit}
                 <strong>${ingredient.name}</strong>
             </li>
         </c:forEach>
