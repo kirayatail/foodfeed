@@ -13,6 +13,29 @@
         <form:label path="description">Description</form:label>
         <form:errors path="description" element="div" />
         <form:textarea path="description" class="textform"/><br/>
+        <h2>Ingredients</h2>
+        <c:forEach items="${recipe.ingredients}" var="ingredient" varStatus="status">
+            <form:label path="ingredients[${status.index}].grocery.id">Name</form:label>
+            <form:errors path="ingredients[${status.index}].grocery.id" />
+            <form:input path="ingredients[${status.index}].grocery.id" class="textform"/><br/>
+            <form:label path="ingredients[${status.index}].amount">Amount</form:label>
+            <form:errors path="ingredients[${status.index}].amount" />
+            <form:input path="ingredients[${status.index}].amount" class="textform"/><br/>
+            <form:label path="ingredients[${status.index}].unit">Unit</form:label>
+            <form:errors path="ingredients[${status.index}].unit" />
+            <form:input path="ingredients[${status.index}].unit" class="textform"/><br/>
+        </c:forEach>
+
+        <c:set var="size" value="${recipe.ingredientCount}" />
+        <form:label path="ingredients[${size}].grocery.id">Name</form:label>
+        <form:errors path="ingredients[${size}].grocery.id" />
+        <form:input path="ingredients[${size}].grocery.id" class="textform"/><br/>
+        <form:label path="ingredients[${size}].amount">Amount</form:label>
+        <form:errors path="ingredients[${size}].amount" />
+        <form:input path="ingredients[${size}].amount" class="textform"/><br/>
+        <form:label path="ingredients[${size}].unit">Unit</form:label>
+        <form:errors path="ingredients[${size}].unit" />
+        <form:input path="ingredients[${size}].unit" class="textform"/><br/>
         <input type="submit" value="Edit" class="button"/>
     </form:form>
 
