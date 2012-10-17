@@ -19,7 +19,7 @@
                 class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
     <authentication-manager>
-        <authentication-provider user-details-ref='FfUserDetailsService'>
+        <authentication-provider user-service-ref='FfUserDetailsService'>
             <password-encoder ref="encoder" />
         </authentication-provider>
     </authentication-manager>
