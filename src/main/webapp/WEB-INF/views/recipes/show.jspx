@@ -19,4 +19,14 @@
 
     <p>${recipe.description}</p>
 
+    <h2>Ingredients</h2>
+    <ul>
+        <c:forEach items="${recipe.ingredients}" var="ingredient">
+            <li>
+                ${ingredient.amount} ${ingredient.unit}
+                <strong>${ingredient.name}</strong>
+            </li>
+        </c:forEach>
+    </ul>
+
 </jsp:root>
