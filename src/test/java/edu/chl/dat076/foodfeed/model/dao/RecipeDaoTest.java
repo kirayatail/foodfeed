@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.dat076.foodfeed.model.dao;
 
 import edu.chl.dat076.foodfeed.model.entity.Grocery;
@@ -28,8 +24,10 @@ public class RecipeDaoTest {
     @Autowired
     RecipeDao recipeDao;
 
-    @Test
-    public void testCreate(){
+    /*
+     * Creates a Recipe Object to be used in tests
+     */
+    private Recipe createTestRecipeObject(){
         List<Ingredient> ingredients = new ArrayList();
         ingredients.add(new Ingredient(new Grocery("Red pepper", "Swedish red pepper"), 2.0, "stycken"));
         ingredients.add(new Ingredient(new Grocery("Water", "Tap water"), 20.0, "liter"));
@@ -38,19 +36,69 @@ public class RecipeDaoTest {
         recipe.setDescription("Best soup in the world");
         recipe.setName("Soup");
         recipe.setIngredients(ingredients);
-        
-        recipeDao.create(recipe);
-        testFind("Soup");
+        return recipe;
     }
     
-    public void testFind(String name){
-        List<Recipe> result = recipeDao.getByName(name);
-        Assert.assertTrue("found no recipe", !result.isEmpty());
+    @Test
+    public void testCreate(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        Assert.assertNotNull("recipe could not be created", recipe.getId());
+    }
+    
+    @Test
+    public void testDelete(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        recipeDao.delete(recipe);
+        Assert.assertNull("recipe removed", recipe.getId());
+    }
+    
+    @Test
+    public void testDeleteID(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        recipeDao.delete(recipe.getId());
+        Assert.assertNull("recipe not removed", recipe.getId());
+    }
+    
+    @Test
+    public void testFind(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        Recipe result = recipeDao.find(recipe.getId());
+        Assert.assertNotNull("recipe not found", result);
     }
     
     @Test
     public void testFindAll() {
         List<Recipe> recipes = recipeDao.findAll();
         assertTrue("check that true is true", true);
+    }
+    
+    @Test
+    public void testUpdate(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        Recipe old = recipe;
+        recipe.setName("New name");
+        recipeDao.update(recipe);
+        Assert.assertNotSame("recipe not updated", recipe.getName(), old.getName());
+    }
+    
+    @Test
+    public void testGetByIngredient(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        List<Recipe> result = recipeDao.getByIngredient(recipe.getIngredients().get(0));
+        Assert.assertTrue("found no recipe", !result.isEmpty());
+    }
+    
+    @Test
+    public void testGetByName(){
+        Recipe recipe = createTestRecipeObject();
+        recipeDao.create(recipe);
+        List<Recipe> result = recipeDao.getByName(recipe.getName());
+        Assert.assertTrue("found no recipe", !result.isEmpty());
     }
 }
