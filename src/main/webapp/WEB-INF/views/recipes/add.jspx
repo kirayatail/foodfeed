@@ -36,10 +36,10 @@
                     <button name="remove-ingredient" value="${status.index}" class="button">Remove</button>
                 </div>
             </c:forEach>
+            <input type="submit" name="add-ingredient" value="Add ingredient" class="button"/>
         </div>
 
         <input type="submit" name="add" value="Create" class="button"/>
-        <input type="submit" name="add-ingredient" value="Add ingredient" class="button"/>
     </form:form>
 
 </jsp:root>
