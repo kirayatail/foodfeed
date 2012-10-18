@@ -40,11 +40,11 @@ public class RecipeDaoTest {
         recipe.setIngredients(ingredients);
         
         recipeDao.create(recipe);
-        testFind(recipe);
+        testFind("Soup");
     }
     
-    public void testFind(Recipe recipe){
-        List<Recipe> result = recipeDao.getByName(recipe.getName());
+    public void testFind(String name){
+        List<Recipe> result = recipeDao.getByName(name);
         Assert.assertTrue("found no recipe", !result.isEmpty());
     }
     
