@@ -31,8 +31,8 @@ public class RecipeDaoTest {
     @Test
     public void testCreate(){
         List<Ingredient> ingredients = new ArrayList();
-        ingredients.add(new Ingredient(new Grocery("Red pepper"), 2.0, "stycken"));
-        ingredients.add(new Ingredient(new Grocery("Water"), 20.0, "liter"));
+        ingredients.add(new Ingredient(new Grocery("Red pepper", "Swedish red pepper"), 2.0, "stycken"));
+        ingredients.add(new Ingredient(new Grocery("Water", "Tap water"), 20.0, "liter"));
         
         Recipe recipe = new Recipe();
         recipe.setDescription("Best soup in the world");
