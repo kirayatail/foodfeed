@@ -30,6 +30,15 @@ public class Ingredient implements IEntity<Long>, Serializable {
     private Double amount;
     private String unit;
 
+    public Ingredient() {
+    }
+
+    public Ingredient(Grocery grocery, Double amount, String unit) {
+        this.grocery = grocery;
+        this.amount = amount;
+        this.unit = unit;
+    }
+
     @Override
     public Long getId() {
         return this.id;
