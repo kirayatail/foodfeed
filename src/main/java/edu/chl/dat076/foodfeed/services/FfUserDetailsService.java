@@ -35,6 +35,7 @@ public class FfUserDetailsService implements UserDetailsService {
         User usr;
         try {
             usr = ud.find(username);
+            log.info("Found user with credentials id: "+usr.getId()+" pass: "+usr.getPassword());
         } catch(ResourceNotFoundException exc){
             log.error(username+" does not exist in DB");
             throw new UsernameNotFoundException(username);            
