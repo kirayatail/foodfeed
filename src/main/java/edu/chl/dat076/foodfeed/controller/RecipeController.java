@@ -1,22 +1,21 @@
 package edu.chl.dat076.foodfeed.controller;
 
+import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
+import edu.chl.dat076.foodfeed.model.entity.Ingredient;
+import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
-import edu.chl.dat076.foodfeed.model.entity.Recipe;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
 
 /**
  * Handles requests for recipes.
@@ -49,14 +48,16 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String addForm(Model model) {
         logger.info("Showing form to add a Recipe.");
-        model.addAttribute("recipe", new Recipe());
+        Recipe recipe = new Recipe();
+        recipe.getIngredients().add(new Ingredient());
+        model.addAttribute("recipe", recipe);
         return "recipes/add";
     }
 
     /**
      * Creates a recipe
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST, params = "add")
     @Secured("ROLE_USER")
     public String add(Model model, @Validated Recipe recipe, BindingResult result) {
         if (result.hasErrors()) {
@@ -65,6 +66,17 @@ public class RecipeController {
         logger.info("Saving a new recipe.");
         recipeDao.create(recipe);
         return "redirect:/recipes/" + recipe.getId();
+    }
+
+    /**
+     * Adds another ingredient when creating a recipe.
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST, params = "add-ingredient")
+    @Secured("ROLE_USER")
+    public String addIngredientOnAdd(Model model, @Validated Recipe recipe, BindingResult result) {
+        logger.info("Adding another ingredient.");
+        recipe.getIngredients().add(new Ingredient());
+        return "recipes/add";
     }
 
     /**
@@ -92,7 +104,7 @@ public class RecipeController {
     /**
      * Edits a recipe
      */
-    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "edit")
     @Secured("ROLE_USER")
     public String edit(Model model, @Validated Recipe recipe, BindingResult result) {
         if (result.hasErrors()) {
@@ -101,6 +113,17 @@ public class RecipeController {
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
         recipeDao.update(recipe);
         return "redirect:/recipes/" + recipe.getId();
+    }
+
+    /**
+     * Adds an ingredient when editing a recipe.
+     */
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "add-ingredient")
+    @Secured("ROLE_USER")
+    public String addIngredientOnEdit(Model model, @Validated Recipe recipe, BindingResult result) {
+        logger.info("Adding another ingredient.");
+        recipe.getIngredients().add(new Ingredient());
+        return "recipes/edit";
     }
 
     /**

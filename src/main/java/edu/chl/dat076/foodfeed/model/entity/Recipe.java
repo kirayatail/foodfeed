@@ -2,6 +2,7 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,6 +29,10 @@ public class Recipe implements IEntity<Long>, Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @Valid
     private List<Ingredient> ingredients;
+    
+    public Recipe() {
+        this.ingredients = new ArrayList<>();
+    }
 
     @Override
     public Long getId() {
