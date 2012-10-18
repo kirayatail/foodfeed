@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,7 +75,7 @@ public class RecipeController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, params = "add-ingredient")
     @Secured("ROLE_USER")
-    public String addIngredientOnAdd(Model model, @Validated Recipe recipe, BindingResult result) {
+    public String addIngredientOnAdd(@ModelAttribute Recipe recipe) {
         logger.info("Adding another ingredient.");
         recipe.getIngredients().add(new Ingredient());
         return "recipes/add";
@@ -85,8 +86,8 @@ public class RecipeController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, params = "remove-ingredient")
     @Secured("ROLE_USER")
-    public String removeIngredientOnAdd(Model model, @Validated Recipe recipe,
-            BindingResult result, @RequestParam("remove-ingredient") int index) {
+    public String removeIngredientOnAdd(@ModelAttribute Recipe recipe,
+            @RequestParam("remove-ingredient") int index) {
         logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
         return "recipes/add";
@@ -133,7 +134,7 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "add-ingredient")
     @Secured("ROLE_USER")
-    public String addIngredientOnEdit(Model model, @Validated Recipe recipe, BindingResult result) {
+    public String addIngredientOnEdit(@ModelAttribute Recipe recipe) {
         logger.info("Adding another ingredient.");
         recipe.getIngredients().add(new Ingredient());
         return "recipes/edit";
@@ -144,8 +145,8 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "remove-ingredient")
     @Secured("ROLE_USER")
-    public String removeIngredientOnEdit(Model model, @Validated Recipe recipe,
-            BindingResult result, @RequestParam("remove-ingredient") int index) {
+    public String removeIngredientOnEdit(@ModelAttribute Recipe recipe,
+         @RequestParam("remove-ingredient") int index) {
         logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
         return "recipes/edit";
