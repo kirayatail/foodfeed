@@ -140,6 +140,10 @@ form #ingredients {
     padding: 0.5em;
 }
 
+form .ingredient-field {
+    display: inline;
+}
+
 h1, h2, h3 {
     margin-top: 0;
 }
@@ -160,6 +164,7 @@ form .ingredient {
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     -webkit-box-shadow: rgba(0,0,0, 0.12) 0px 0px 8px;
     margin-bottom: 1em;
+    margin-right: 1em;
 }
 
 textarea {
@@ -176,15 +181,17 @@ textarea {
 
 label {
     color: #000000;
-    display: inline-block;
-    margin-left: 0;
-    margin-right: 0.4em;
-    width: 6em;
-    text-align: right;
+    display: block;
     font-size: 0.8em;
     font-weight: bold;
-    float: left;
-    margin-top: 0.5em;        
+    margin-top: 0.5em;  
+}
+
+.ingredient-field label {
+    display: inline;
+    margin-left: 0;
+    margin-right: 0.4em;
+    text-align: right;      
 }
 
 .button {        
@@ -195,7 +202,7 @@ label {
     background-image: -moz-linear-gradient(top, #eee, #ccc);
     border: 1px solid #777;
     padding: 0 1.5em;
-    margin: 0.5em;
+    margin: 0.5em 0.5em 0.5em 0;
     font: bold 0.75em/2em Arial, Helvetica;
     text-decoration: none;
     color: #333;
