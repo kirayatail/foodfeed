@@ -19,6 +19,7 @@ public class UserDao extends AbstractDao<User, String> {
     
     @Override
     public void create(User u){
+        
         u.setPassword(encoder.encode(u.getPassword()));        
         super.create(u);
         
