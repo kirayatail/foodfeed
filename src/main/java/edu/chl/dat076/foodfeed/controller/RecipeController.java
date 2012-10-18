@@ -87,7 +87,7 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String removeIngredientOnAdd(Model model, @Validated Recipe recipe,
             BindingResult result, @RequestParam("remove-ingredient") int index) {
-        logger.info("Removing ingredient att index +" + index + "+.");
+        logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
         return "recipes/add";
     }
@@ -146,7 +146,7 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String removeIngredientOnEdit(Model model, @Validated Recipe recipe,
             BindingResult result, @RequestParam("remove-ingredient") int index) {
-        logger.info("Removing ingredient att index +" + index + "+.");
+        logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
         return "recipes/edit";
     }
