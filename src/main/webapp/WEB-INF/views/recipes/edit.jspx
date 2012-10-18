@@ -26,17 +26,8 @@
             <form:input path="ingredients[${status.index}].unit" class="textform"/><br/>
         </c:forEach>
 
-        <c:set var="size" value="${recipe.ingredientCount}" />
-        <form:label path="ingredients[${size}].grocery.id">Name</form:label>
-        <form:errors path="ingredients[${size}].grocery.id" />
-        <form:input path="ingredients[${size}].grocery.id" class="textform"/><br/>
-        <form:label path="ingredients[${size}].amount">Amount</form:label>
-        <form:errors path="ingredients[${size}].amount" />
-        <form:input path="ingredients[${size}].amount" class="textform"/><br/>
-        <form:label path="ingredients[${size}].unit">Unit</form:label>
-        <form:errors path="ingredients[${size}].unit" />
-        <form:input path="ingredients[${size}].unit" class="textform"/><br/>
-        <input type="submit" value="Edit" class="button"/>
+        <input type="submit" name="edit" value="Edit" class="button"/>
+        <input type="submit" name="add-ingredient" value="Add ingredient" class="button"/>
     </form:form>
 
 </jsp:root>
