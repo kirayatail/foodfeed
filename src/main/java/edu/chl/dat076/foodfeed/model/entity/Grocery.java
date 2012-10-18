@@ -19,7 +19,8 @@ public class Grocery implements IEntity<String>, Serializable {
     
     }
 
-    public Grocery(String description) {
+    public Grocery(String id, String description) {
+        this.id = id;
         this.description = description;
     }
 
