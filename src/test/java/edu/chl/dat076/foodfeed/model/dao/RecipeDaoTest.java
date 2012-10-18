@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-    "classpath*:spring/root-context.xml"})
+    "classpath*:spring/root-context.xml",
+    "classpath*:spring/security-context.xml"})
 @Transactional
 public class RecipeDaoTest {
 
