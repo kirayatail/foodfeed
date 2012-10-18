@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for recipes.
@@ -80,6 +81,18 @@ public class RecipeController {
     }
 
     /**
+     * Removes an ingredient when creating a recipe.
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST, params = "remove-ingredient")
+    @Secured("ROLE_USER")
+    public String removeIngredientOnAdd(Model model, @Validated Recipe recipe,
+            BindingResult result, @RequestParam("remove-ingredient") int index) {
+        logger.info("Removing ingredient att index +" + index + "+.");
+        recipe.getIngredients().remove(index);
+        return "recipes/add";
+    }
+
+    /**
      * Shows a recipe
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -123,6 +136,18 @@ public class RecipeController {
     public String addIngredientOnEdit(Model model, @Validated Recipe recipe, BindingResult result) {
         logger.info("Adding another ingredient.");
         recipe.getIngredients().add(new Ingredient());
+        return "recipes/edit";
+    }
+
+    /**
+     * Removes an ingredient when editing a recipe.
+     */
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "remove-ingredient")
+    @Secured("ROLE_USER")
+    public String removeIngredientOnEdit(Model model, @Validated Recipe recipe,
+            BindingResult result, @RequestParam("remove-ingredient") int index) {
+        logger.info("Removing ingredient att index +" + index + "+.");
+        recipe.getIngredients().remove(index);
         return "recipes/edit";
     }
 
