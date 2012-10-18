@@ -21,4 +21,10 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         res.setParameter("i_id", i.getId());
         return res.getResultList();
     }
+    
+    public List<Recipe> getByName(String name){
+        Query res = entityManager.createQuery("select r from Recipe r where r.name=:name");
+        res.setParameter("name", name);
+        return res.getResultList();
+    }
 }
