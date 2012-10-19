@@ -14,11 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author max
  */
+
+@Transactional
 public class FfUserDetailsService implements UserDetailsService {
     
      private static final Logger log = LoggerFactory
@@ -32,16 +35,16 @@ public class FfUserDetailsService implements UserDetailsService {
         
         log.info("Finding user with username "+username);
         
-        User usr;
+        User user;
         try {
-            usr = ud.find(username);
-            log.info("Found user with credentials id: "+usr.getId()+" pass: "+usr.getPassword());
+            user = ud.find(username);
+            log.info("Found user with credentials id: "+user.getId()+" pass: "+user.getPassword());
         } catch(ResourceNotFoundException exc){
             log.error(username+" does not exist in DB");
             throw new UsernameNotFoundException(username);            
         }
         
-        return new FfUser(usr.getId(), usr.getPassword());
+        return new FfUser(user.getId(), user.getPassword());
     }
     
 }
