@@ -15,16 +15,14 @@
         <head>
             <meta charset="UTF-8" />
             <title><tiles:insertAttribute name="title" ignore="true" /> | Foodfeed</title>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-            <script type="text/javascript" src="http://cdn.aloha-editor.org/latest/lib/require.js"></script>
-            <script src="http://cdn.aloha-editor.org/latest/lib/aloha.js"
-                    data-aloha-plugins="common/ui,
-                    common/format,
-                    common/list,
-                    common/link,
-                    common/highlighteditables">
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"><jsp:text/></script>
+            <script type="text/javascript" src="http://cdn.aloha-editor.org/latest/lib/require.js"><jsp:text/></script>
+            <script src="http://cdn.aloha-editor.org/latest/lib/aloha.js" 
+                    data-aloha-plugins="common/ui, common/format, common/list, common/link">
+                <jsp:text/>
             </script>
-            <spring:url value="/resources/js/script.js"  var="style"/>
+            <spring:url value="/resources/js/script.js"  var="script"/>
+            <script src="${script}"><jsp:text/></script>
 
             <link href="http://cdn.aloha-editor.org/latest/css/aloha.css" rel="stylesheet" type="text/css" />
             <spring:url value="/resources/css/style.css"  var="style"/>
