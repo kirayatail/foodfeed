@@ -24,6 +24,6 @@
         </authentication-provider>
     </authentication-manager>
     
-    <beans:bean id="FfUserDetailsService" class="edu.chl.dat076.foodfeed.services.FfUserDetailsService" />
+    <beans:bean id="FfUserDetailsService" class="edu.chl.dat076.foodfeed.model.security.FfUserDetailsService" />
 
 </beans:beans>
