@@ -34,24 +34,15 @@ public class UserController {
     @Autowired
     private UserDao userDao;
     
-    @Autowired
-    @Qualifier("org.springframework.security.authenticationManager")
-    protected AuthenticationManager authenticationManager;
 
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr, BindingResult result, HttpServletRequest request) {
-        logger.info("Registering new user");
-        logger.info("Provided password: "+usr.getPassword());
+    public String doRegister(Model model, @Validated User usr) {
         userDao.create(usr);
-        logger.info("Password after DB create: "+usr.getPassword());
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usr.getUsername(), usr.getPassword());
-        Authentication auth = authenticationManager.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(auth);
         
-        return "redirect:/";
+        return "redirect:login";
     }
 
     /*
