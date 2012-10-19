@@ -35,7 +35,7 @@ public class RecipeController {
     /**
      * Shows a list of recipes
      */
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model) {
         List<Recipe> recipes = recipeDao.findAll();
         logger.info("Listing " + recipes.size() + " recipes.");

@@ -5,6 +5,7 @@ import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository("recipeDao")
@@ -23,7 +24,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
     }
     
     public List<Recipe> getByName(String name){
-        Query res = entityManager.createQuery("select r from Recipe r where r.name=:name");
+        TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r where r.name=:name", Recipe.class);
         res.setParameter("name", name);
         return res.getResultList();
     }
