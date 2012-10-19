@@ -1,0 +1,23 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:form="http://www.springframework.org/tags/form"
+          xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+    <h1>Change password for ${user.username}</h1>
+
+    <form:form commandName="user">
+        <div>
+            <form:label path="newPass">New password</form:label>
+            <form:password path="newPass" class="textform"/>
+            <form:errors path="newPass" element="div" />
+        </div>
+        <div>
+            <form:label path="oldPass">Old password</form:label>
+            <form:password path="oldPass" class="textform"/>
+            <form:errors path="oldPass" element="div" />
+        </div>
+        <input type="submit" name="edit" value="Update" class="button"/>
+    </form:form>
+
+</jsp:root>
