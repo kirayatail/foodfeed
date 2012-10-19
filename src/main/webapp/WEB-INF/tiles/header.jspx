@@ -4,6 +4,4 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	The header
-
 </jsp:root>
