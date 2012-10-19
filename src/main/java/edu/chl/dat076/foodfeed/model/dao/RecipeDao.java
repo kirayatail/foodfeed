@@ -4,6 +4,7 @@ import edu.chl.dat076.foodfeed.model.entity.Ingredient;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository("recipeDao")
 public class RecipeDao extends AbstractDao<Recipe, Long> {
 
+    @PersistenceContext
     protected EntityManager entityManager;
     
     RecipeDao() {
@@ -18,7 +20,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
     }
     
     public List<Recipe> getByIngredient(Ingredient i){
-        Query res= entityManager.createQuery("select r from Recipe r where r.id=(select ri.recipeid from Recipe_Ingredient where ri.ingredientid =:i_id)");
+        TypedQuery<Recipe> res= entityManager.createQuery("select r from Recipe r where r.id=(select ri.recipeid from Recipe_Ingredient where ri.ingredientid =:i_id)", Recipe.class);
         res.setParameter("i_id", i.getId());
         return res.getResultList();
     }
