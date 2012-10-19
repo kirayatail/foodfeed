@@ -1,13 +1,19 @@
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
+import edu.chl.dat076.foodfeed.model.dao.UserDao;
 import edu.chl.dat076.foodfeed.model.entity.Ingredient;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
+import edu.chl.dat076.foodfeed.model.entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.SpringSessionContext;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -26,7 +32,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/recipes")
 @Transactional
 public class RecipeController {
-
+    
+    @Autowired
+    private UserDao userDao;
+    
     @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
@@ -66,7 +75,17 @@ public class RecipeController {
             return "recipes/add";
         }
         logger.info("Saving a new recipe.");
+        
+        User activeUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        
+        if(activeUser.getRecipes() == null){
+            activeUser.setRecipes(new ArrayList<Recipe>());
+        }
+        activeUser.getRecipes().add(recipe);
+        
         recipeDao.create(recipe);
+        userDao.update(activeUser);
+        
         return "redirect:/recipes/" + recipe.getId();
     }
 
