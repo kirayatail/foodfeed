@@ -22,6 +22,11 @@ public class User implements Serializable, IEntity<String> {
     @OneToMany
     private List<Recipe> recipes;
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public String getId() {
         return this.username;
