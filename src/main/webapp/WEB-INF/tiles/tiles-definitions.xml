@@ -53,4 +53,9 @@
         <put-attribute name="title" expression="${user.username}" />
         <put-attribute name="content" value="/WEB-INF/views/user/show.jspx" />
     </definition>
+    
+    <definition name="search/result" extends="base">
+        <put-attribute name="title" expression="Search for ${query}" />
+        <put-attribute name="content" value="/WEB-INF/views/search/result.jspx" />
+    </definition>
 </tiles-definitions>
