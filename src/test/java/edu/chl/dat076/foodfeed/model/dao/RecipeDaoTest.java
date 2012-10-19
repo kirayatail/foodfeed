@@ -32,7 +32,7 @@ public class RecipeDaoTest {
      * Creates a Recipe Object to be used in tests
      */
     private Recipe createTestRecipeObject(){
-        List<Ingredient> ingredients = new ArrayList();
+        List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(new Grocery("Red pepper", "Swedish red pepper"), 2.0, "stycken"));
         ingredients.add(new Ingredient(new Grocery("Water", "Tap water"), 20.0, "liter"));
         
