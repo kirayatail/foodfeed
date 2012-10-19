@@ -26,6 +26,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     @NotNull
     @Size(min = 1, message = "The description must consist of at least one character")
     private String description;
+    private String instructions;
     @OneToMany(cascade = CascadeType.ALL)
     @Valid
     private List<Ingredient> ingredients;
@@ -34,6 +35,13 @@ public class Recipe implements IEntity<Long>, Serializable {
         this.ingredients = new ArrayList<>();
     }
 
+    public Recipe(String name, String description, String instructions, List<Ingredient> ingredients) {
+        this.name = name;
+        this.description = description;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
+    }
+    
     @Override
     public Long getId() {
         return id;
@@ -58,7 +66,15 @@ public class Recipe implements IEntity<Long>, Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public String getInstructions() {
+        return instructions;
+    }
 
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+       
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
