@@ -17,12 +17,15 @@ footer {
 
 header {
     border-radius: 1em 1em 0 0;
+    height: 130px;
     background-image: url('../images/logga.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
 }
 
 header,
 footer {
-    background: #e2e2e2;
+    background-color: #e2e2e2;
 }
 
 nav {
