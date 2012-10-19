@@ -26,6 +26,8 @@ public class Recipe implements IEntity<Long>, Serializable {
     @NotNull
     @Size(min = 1, message = "The description must consist of at least one character")
     private String description;
+    @NotNull
+    @Size(min = 1, message = "The instructions must consist of at least one character")
     private String instructions;
     @OneToMany(cascade = CascadeType.ALL)
     @Valid
