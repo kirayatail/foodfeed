@@ -63,17 +63,11 @@ public class UserController {
     
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String show(Model model){
-        logger.info("showing the authenticated user");
-        
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        
-        
-        logger.info("the shown principal is "+auth.getName());
-        
-        User usr = userDao.find(auth.getName());
+        logger.info("showing the authenticated user");        
+        User usr = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
         
         model.addAttribute("user", usr);
+        model.addAttribute("recipes", usr.getRecipes());
         
         return "user/show";
     }
