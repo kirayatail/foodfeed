@@ -5,7 +5,6 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
 import java.io.Serializable;
-import javax.persistence.Id;
 
 /**
  *
