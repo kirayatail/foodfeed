@@ -18,6 +18,8 @@
     </ul>
 
     <p>${recipe.description}</p>
+    
+    <p>${recipe.instructions}</p>
 
     <h2>Ingredients</h2>
     <ul>
