@@ -27,7 +27,7 @@ public class SearchController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(Model model, @RequestParam(value="query") String query) {
         
-        //recipeDao.getByName(query);
+        recipeDao.getByName(query);
         
         model.addAttribute("query", query);
         
