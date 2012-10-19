@@ -16,3 +16,6 @@ nb-configuration.xml
 #Testing DB
 FoodFeedDB/
 derby.log
+
+# STAN
+.stan
