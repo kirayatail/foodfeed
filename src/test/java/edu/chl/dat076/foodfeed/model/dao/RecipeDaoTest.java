@@ -1,15 +1,10 @@
 package edu.chl.dat076.foodfeed.model.dao;
 
 import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
-import edu.chl.dat076.foodfeed.model.entity.Grocery;
-import edu.chl.dat076.foodfeed.model.entity.Ingredient;
-import edu.chl.dat076.foodfeed.model.entity.Recipe;
+import edu.chl.dat076.foodfeed.model.entity.*;
 import java.util.ArrayList;
 import java.util.List;
-import junit.framework.Assert;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -76,7 +71,7 @@ public class RecipeDaoTest {
     @Test
     public void testFindAll() {
         List<Recipe> recipes = recipeDao.findAll();
-        assertFalse("Check that true is true", recipes.isEmpty());
+        Assert.assertFalse("Check that true is true", recipes.isEmpty());
     }
     
     @Test
