@@ -6,12 +6,8 @@ package edu.chl.dat076.foodfeed.model.dao;
 
 import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import edu.chl.dat076.foodfeed.model.entity.User;
-import java.util.ArrayList;
 import java.util.List;
-import junit.framework.Assert;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -73,7 +69,7 @@ public class UserDaoTest {
     @Test
     public void testFindAll() {
         List<User> users = userDao.findAll();
-        assertFalse("Check that true is true", users.isEmpty());
+        Assert.assertFalse("Check that true is true", users.isEmpty());
     }
     
     @Test
