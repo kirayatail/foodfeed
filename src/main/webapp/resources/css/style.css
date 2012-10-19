@@ -21,11 +21,19 @@ header {
     background-image: url('../images/logga.png');
     background-repeat: no-repeat;
     background-position-x: center;
+    padding-bottom: 0em;
+    padding-top:0em;
 }
 
 header,
 footer {
     background-color: #e2e2e2;
+}
+
+header a{
+    display:block;
+    height:108px;
+    width:960px;
 }
 
 nav {
