@@ -16,6 +16,11 @@
             <form:textarea path="description" class="textform"/>
             <form:errors path="description" element="div" />
         </div>
+        <div>
+            <form:label path="instructions">Instructions</form:label>
+            <form:textarea path="instructions" class="textform editable"/>
+            <form:errors path="instructions" element="div" />
+        </div>
         <div id="ingredients">
             <h2>Ingredients</h2>
             <c:forEach items="${recipe.ingredients}" var="ingredient" varStatus="status">
@@ -39,7 +44,7 @@
             <input type="submit" name="add-ingredient" value="Add ingredient" class="button"/>
         </div>
 
-        <input type="submit" name="edit" value="Edit" class="button"/>
+        <input type="submit" name="edit" value="Save" class="button"/>
     </form:form>
 
 </jsp:root>
