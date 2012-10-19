@@ -40,6 +40,7 @@ public class RecipeDaoTest {
         recipe.setDescription("Best soup in the world");
         recipe.setName("Soup");
         recipe.setIngredients(ingredients);
+        recipe.setInstructions("Add all ingredients");
         return recipe;
     }
     
