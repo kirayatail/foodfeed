@@ -3,6 +3,7 @@ package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.UserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
+import edu.chl.dat076.foodfeed.util.EncoderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,4 +69,32 @@ public class UserController {
         logger.info("Showing form to log in.");
         return "user/login";
     }
+    
+    @RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
+    public String getEditForm(@PathVariable String id, Model model){
+        User user = userDao.find(id);
+        
+        model.addAttribute("newPass", new String());
+        model.addAttribute("oldPass", new String());
+        model.addAttribute("user", user);
+        
+        return "user/edit";
+    }
+    
+    
+    @RequestMapping(value="/{id}/edit", method = RequestMethod.POST)
+    public String doEdit(Model model, User user){
+        
+        String oldPass = (String) model.asMap().get("oldPass");
+        
+        if(EncoderUtil.encode(oldPass).equals(user.getPassword())) {
+            String newPass = (String) model.asMap().get("newPass");
+            user.setPassword(EncoderUtil.encode(newPass));
+        }
+        
+        userDao.update(user);
+        
+        return null;
+    }
+            
 }
