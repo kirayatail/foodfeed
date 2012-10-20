@@ -49,6 +49,7 @@ public class Recipe implements IEntity<Long>, Serializable {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
