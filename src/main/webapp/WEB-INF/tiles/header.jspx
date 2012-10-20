@@ -8,8 +8,8 @@
 
     <spring:url value="/search" var="search"/>
     
-    <form action="${search}" method="GET">
-        <input name="query" type="text" class="textform"/>
-        <input type="submit" value="Search" />
+    <form action="${search}" method="GET" class="searchform">
+        <input name="query" type="text" class="textform" placeholder="Search"/>
+        <input type="submit" value="Search" class="button"/>
     </form>
 </jsp:root>
