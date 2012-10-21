@@ -6,6 +6,6 @@
 
 	<h1>Hello Recipe!</h1>
 
-	<p>The time on the server is ${serverTime}.</p>
+	<p>Use menu to browse for recipes or log in to add new recipes.</p>
 
 </jsp:root>
