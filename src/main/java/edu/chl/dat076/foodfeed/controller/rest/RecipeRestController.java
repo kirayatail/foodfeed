@@ -32,28 +32,13 @@ public class RecipeRestController {
     /**
      * Shows a list of recipes
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public List<Recipe> list() {
         List<Recipe> recipes = recipeDao.findAll();
         logger.info("Listing " + recipes.size() + " recipes.");
         return recipes;
     }
-
-    /**
-     * #TODO maybe should this be implemented, don't know how
-     * Form to add a recipe
-     */
-    /*@RequestMapping(value = "/add", method = RequestMethod.GET)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    public String addForm() {
-        logger.info("Showing form to add a Recipe.");
-        Recipe recipe = new Recipe();
-        recipe.getIngredients().add(new Ingredient());
-        model.addAttribute("recipe", recipe);
-        return "recipes/add";
-    }*/
     
     /**
      * Creates a recipe
@@ -77,31 +62,29 @@ public class RecipeRestController {
     }
 
     /**
-     * #TODO should this be implemented?
-     * Adds another ingredient when creating a recipe.
+     * Adds another ingredient to a recipe.
      */
-    /*@RequestMapping(value = "/addIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/addIn", method = RequestMethod.POST)
     @Secured("ROLE_USER")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public void addIngredientOnAdd(@RequestParam("recipe") Recipe recipe) {
+    public void addIngredient(@RequestParam("recipe") Recipe recipe) {
         logger.info("Adding another ingredient.");
         recipe.getIngredients().add(new Ingredient());
-    }*/
+    }
 
     /**
-     * #TODO should this be implemented?
-     * Removes an ingredient when creating a recipe.
+     * Removes an ingredient from a recipe.
      */
-    /*@RequestMapping(value = "/addRemIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/addRemIn", method = RequestMethod.POST)
     @Secured("ROLE_USER")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public void removeIngredientOnAdd(@RequestParam("recipe") Recipe recipe,
+    public void removeIngredient(@RequestParam("recipe") Recipe recipe,
             @RequestParam("remove-ingredient") int index) {
         logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
-    }*/
+    }
 
     /**
      * Shows a recipe
@@ -111,18 +94,6 @@ public class RecipeRestController {
     public Recipe show(@PathVariable long id) {
         logger.info("Showing recipe with ID " + id + ".");
         return  recipeDao.find(id);
-    }
-
-    /**
-     * Form to edit a recipe
-     */
-    @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    public Recipe editForm(@PathVariable long id) {
-        Recipe recipe = recipeDao.find(id);
-        logger.info("Showing form to edit recipe with ID " + recipe.getId() + ".");
-        return recipe;
     }
 
     /**
@@ -136,31 +107,6 @@ public class RecipeRestController {
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
         recipeDao.update(recipe);
     }
-
-    /**
-     * #TODO should this be implemented?
-     * Adds an ingredient when editing a recipe.
-     */
-    /*@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "add-ingredient")
-    @Secured("ROLE_USER")
-    public String addIngredientOnEdit(@ModelAttribute Recipe recipe) {
-        logger.info("Adding another ingredient.");
-        recipe.getIngredients().add(new Ingredient());
-        return "recipes/edit";
-    }*/
-
-    /**
-     * #TODO should this be implemented?
-     * Removes an ingredient when editing a recipe.
-     */
-    /*@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "remove-ingredient")
-    @Secured("ROLE_USER")
-    public String removeIngredientOnEdit(@ModelAttribute Recipe recipe,
-         @RequestParam("remove-ingredient") int index) {
-        logger.info("Removing ingredient att index " + index + ".");
-        recipe.getIngredients().remove(index);
-        return "recipes/edit";
-    }*/
 
     /**
      * Deletes a recipe
