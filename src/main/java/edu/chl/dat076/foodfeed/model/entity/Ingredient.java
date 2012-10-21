@@ -44,6 +44,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
         return this.id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
