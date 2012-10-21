@@ -3,16 +3,12 @@ package edu.chl.dat076.foodfeed.model.dao;
 import edu.chl.dat076.foodfeed.model.entity.Ingredient;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository("recipeDao")
 public class RecipeDao extends AbstractDao<Recipe, Long> {
 
-    @PersistenceContext
-    protected EntityManager entityManager;
     
     RecipeDao() {
         super(Recipe.class);
