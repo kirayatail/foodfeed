@@ -7,7 +7,8 @@ body {
 header,
 nav,
 section,
-footer {
+footer,
+#flash {
     background: #fff;
     border: 1px solid #ccc;
     margin: 0 auto;
@@ -34,6 +35,26 @@ header a{
     display:block;
     height:108px;
     width:960px;
+}
+
+.message {
+    border: 1px solid;
+    padding: 0.5em;
+}
+
+.info {
+    background-color: #6cfe5f; 
+    border-color: #0c8801;
+}
+
+.warning {
+    background-color: #fdf954; 
+    border-color: #e2ac00; 
+}
+
+.error {
+    background-color: #fd5d4b; 
+    border-color: #de1600;
 }
 
 nav {
