@@ -84,8 +84,8 @@ public class RecipeDaoTest {
     }
     
     @Test
-    public void testGetByIngredient(){
-        List<Recipe> result = recipeDao.getByIngredient(recipe.getIngredients().get(0));
+    public void testGetByGrocery(){
+        List<Recipe> result = recipeDao.getByGrocery(recipe.getIngredients().get(0).getGrocery());
         Assert.assertFalse("found no recipe", result.isEmpty());
     }
     
