@@ -7,8 +7,7 @@ body {
 header,
 nav,
 section,
-footer,
-#flash {
+footer {
     background: #fff;
     border: 1px solid #ccc;
     margin: 0 auto;
@@ -39,6 +38,7 @@ header a{
 
 .message {
     border: 1px solid;
+    margin-bottom: 1em;
     padding: 0.5em;
 }
 

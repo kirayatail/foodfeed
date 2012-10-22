@@ -37,10 +37,8 @@
             <nav class="clearfix"><tiles:insertAttribute name="menu" /></nav>
             <section>
                 <c:if test="${flash != null}">
-                    <div id="flash">
-                        <div class="${flash.type.cssClass} message">
-                            <strong>${flash.type.name}:</strong> ${flash.message}
-                        </div>
+                    <div class="${flash.type.cssClass} message">
+                        <strong>${flash.type.name}:</strong> ${flash.message}
                     </div>
                 </c:if>
                 <tiles:insertAttribute name="content" />
