@@ -1,62 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package edu.chl.dat076.foodfeed.controller;
+package edu.chl.dat076.foodfeed.mock;
 
-import edu.chl.dat076.foodfeed.model.dao.IUserDao;
-import edu.chl.dat076.foodfeed.model.dao.MockUserDao;
-import edu.chl.dat076.foodfeed.model.entity.User;
 import java.beans.PropertyEditor;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.PropertyEditorRegistry;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author max
  */
-public class UserControllerTest {
+public class Result implements BindingResult {
     
-    MockUserDao userDao;
-    UserController uc;
-    public UserControllerTest() {
-        userDao = new MockUserDao();
-    }
-    
-    @Before
-    public void buildUp(){
-        userDao.create(new User("adam", "bertil"));
-        userDao.create(new User("bertil", "cesar"));
-        uc = new UserController();
-        ReflectionTestUtils.setField(uc, "userDao", userDao, IUserDao.class);
-    }
-    
-    @After
-    public void tearDown(){
-        userDao.clear();
-    }
-    
-    @Test
-    public void testCreate(){
-        Model model = new Model();
-    }
-    
-}
-
-class Result implements BindingResult {
-    
-    public ObjectError error;
+    public String field;
+    public String message;
 
     @Override
     public Object getTarget() {
@@ -240,11 +200,7 @@ class Result implements BindingResult {
 
     @Override
     public FieldError getFieldError(String string) {
-        return new FieldError(){
-            public String getDefaultMessage(){
-                return "OK";
-            }
-        };
+        return new FieldError(string, string, string);
     }
 
     @Override
