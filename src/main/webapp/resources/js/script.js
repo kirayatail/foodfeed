@@ -11,6 +11,6 @@ Aloha.ready( function() {
 $(document).ready(function(){
     $( ".autocomplete" ).autocomplete({
         source: "/foodfeed/grocery",
-        minLength: 1
+        minLength: 2
     });
 });                    
