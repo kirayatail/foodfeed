@@ -5,6 +5,8 @@
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
+import edu.chl.dat076.foodfeed.model.entity.Recipe;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,15 @@ public class SearchController {
             .getLogger(SearchController.class);
 
     /**
-     * Simply selects the home view to render by returning its name.
+     * Simply selects the search view to render by returning its name.
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(Model model, @RequestParam(value="query") String query) {
         
-        recipeDao.getByName(query);
+        List<Recipe> result = recipeDao.getByName(query);
         
-        model.addAttribute("query", query);
+        model.addAttribute("query", query);        
+        model.addAttribute("recipes", result);
         
         return "search/result";
 

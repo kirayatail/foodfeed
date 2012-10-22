@@ -7,7 +7,15 @@
           
     <h1>Search result for ${query}</h1>
     
-    
+    <c:forEach items="${recipes}" var="recipe">
+        <article>
+            <spring:url value="/recipes/{id}" var="recipeLink">
+                <spring:param name="id" value="${recipe.id}" />
+            </spring:url>
+            <h2><a href="${recipeLink}">${recipe.name}</a></h2>
+            <p>${recipe.description}</p>
+        </article>
+    </c:forEach>
     
     
 </jsp:root>
