@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.controller;
 
+import edu.chl.dat076.foodfeed.exception.AccessDeniedException;
 import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
 import edu.chl.dat076.foodfeed.model.flash.FlashType;
 import edu.chl.dat076.foodfeed.model.dao.*;
@@ -176,9 +177,18 @@ public class RecipeController {
      * Deletes a recipe
      */
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
     public String delete(@PathVariable long id, Model model) {
-        logger.info("Deleting recipe with ID " + id + ".");
-        recipeDao.delete(id);
+        User authUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        Recipe recipe = recipeDao.find(id);
+        if(authUser.getRecipes().contains(recipe)){
+            authUser.getRecipes().remove(recipe);
+            logger.info("Deleting recipe with ID " + id + ".");
+            userDao.update(authUser);
+            recipeDao.delete(id);
+        } else {
+            throw new AccessDeniedException();
+        }
         return "redirect:/recipes";
     }
 }
