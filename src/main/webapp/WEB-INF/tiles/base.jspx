@@ -35,7 +35,16 @@
 
             <header><tiles:insertAttribute name="header" /></header>
             <nav class="clearfix"><tiles:insertAttribute name="menu" /></nav>
-            <section><tiles:insertAttribute name="content" /></section>
+            <section>
+                <c:if test="${flash != null}">
+                    <div id="flash">
+                        <div class="${flash.type.cssClass}">
+                            <strong>${flash.type.name}:</strong> ${flash.message}
+                        </div>
+                    </div>
+                </c:if>
+                <tiles:insertAttribute name="content" />
+            </section>
             <footer><tiles:insertAttribute name="footer" /></footer>
         </body>
     </html>
