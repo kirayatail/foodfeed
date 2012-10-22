@@ -36,4 +36,14 @@ $(document).ready(function(){
         
         $(html).insertBefore('.add-ingredient');
     });
+    
+    $(".remove-ingredient").click(function(event){
+        event.preventDefault();
+        
+        counter = $('.ingredient').length;
+        
+        var at = $this.attr("value");
+        
+        //TODO: code for actual remove here
+    });
 });                    
