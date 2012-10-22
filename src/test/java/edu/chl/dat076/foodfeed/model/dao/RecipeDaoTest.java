@@ -71,7 +71,7 @@ public class RecipeDaoTest {
     @Test
     public void testFindAll() {
         List<Recipe> recipes = recipeDao.findAll();
-        Assert.assertFalse("Check that true is true", recipes.isEmpty());
+        Assert.assertFalse("List is not empty.", recipes.isEmpty());
     }
     
     @Test
