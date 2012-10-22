@@ -10,7 +10,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,14 +50,5 @@ public class UserRestController {
          * (maybe never send passwords, regardless of logged in or not?)
          */
         return userDao.find(id);
-    }
-    
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestParam("username") String username, @RequestParam("password") String pass){
-        User usr = new User(username, pass);
-        userDao.create(usr);
-        
     }
 }
