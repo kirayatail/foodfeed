@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +32,20 @@ public class UserController {
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr) {
-        userDao.create(usr);
+    public String doRegister(Model model, @Validated User usr, BindingResult result) {
         
-        return "redirect:login";
+        if(result.hasErrors()){
+            logger.error(result.getAllErrors().toString());
+            if(!model.containsAttribute("error")){
+                model.addAttribute("error",("The information you entered was not OK, "+result.getFieldError().getDefaultMessage()));
+            }
+            return getRegisterForm(model);
+        } else {
+            userDao.create(usr);
+            return "redirect:login";
+        }
+        
+
     }
 
     /*
