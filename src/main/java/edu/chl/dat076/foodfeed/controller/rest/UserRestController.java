@@ -32,23 +32,12 @@ public class UserRestController {
     @ResponseBody // IMPORTANT! declares that the returned object is the ACTUAL thing to return
                   // and not a reference to a jspx page. JSON will be created through black magic.
     public List<User> getAll(){
-        
-        /*
-         * Here's the point where all users would have their passwords removed 
-         * before sending them to the response
-         */
-        
         return userDao.findAll();
     }
     
     @RequestMapping(value = "/name/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getByID(@PathVariable String id){
-        
-        /*
-         * Place for a check to see if the password should be sent or not
-         * (maybe never send passwords, regardless of logged in or not?)
-         */
         return userDao.find(id);
     }
 }
