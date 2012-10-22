@@ -20,7 +20,6 @@ public class Ingredient implements IEntity<Long>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
     @Valid
     private Grocery grocery;
