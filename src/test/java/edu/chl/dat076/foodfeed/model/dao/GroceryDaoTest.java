@@ -37,8 +37,14 @@ public class GroceryDaoTest {
     }
     
     @Test
-    public void getGrocery(){
-        List<Grocery> result = groceryDao.getGrocery(grocery.getId());
+    public void getGroceries(){
+        List<String> result = groceryDao.getGroceries(grocery.getId());
+        Assert.assertTrue("List is not empty", !result.isEmpty());
+    }
+    
+    @Test
+    public void getGroceriesWithPartialName(){
+        List<String> result = groceryDao.getGroceries("at");
         Assert.assertTrue("List is not empty", !result.isEmpty());
     }
 }
