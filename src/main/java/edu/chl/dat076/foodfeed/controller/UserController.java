@@ -3,6 +3,8 @@ package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
+import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
+import edu.chl.dat076.foodfeed.model.flash.FlashType;
 import edu.chl.dat076.foodfeed.util.EncoderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Serves Registration and view of user profiles.
@@ -32,14 +35,11 @@ public class UserController {
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr, BindingResult result) {
+    public String doRegister(Model model, @Validated User usr, BindingResult result, RedirectAttributes ra) {
         
         if(result.hasErrors()){
-            logger.error(result.getAllErrors().toString());
-            if(!model.containsAttribute("error")){
-                model.addAttribute("error",("The information you entered was not OK, "+result.getFieldError().getDefaultMessage()));
-            }
-            return getRegisterForm(model);
+            ra.addFlashAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
+            return "redirect:register";
         } else {
             userDao.create(usr);
             return "redirect:login";
