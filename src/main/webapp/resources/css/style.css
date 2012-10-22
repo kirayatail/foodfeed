@@ -256,16 +256,50 @@ label {
 
 .searchform {
     float: right;
-    margin-top: 45px;
+    margin-top: 40px;
 }
 
 .searchinput {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    width: 150px;
+    width: 170px;
 }
 
 .formerror {
     font-size: 0.75em;
     color: #CC0000;
+}
+
+.searchbutton {
+    -moz-box-shadow: inset 0px 1px 0px 0px #8bb0c7;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #8bb0c7;
+    box-shadow: inset 0px 1px 0px 0px #8bb0c7;
+    background: -webkit-linear-gradient( top, #63b8ee, #468ccf);
+    background: -moz-linear-gradient(top, #63b8ee, #468ccf);
+    background-color: #63b8ee;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #3866a3;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0.375em 1.25em;
+    text-decoration: none;
+    text-shadow: 1px 1px 0px #2c4866;
+}
+
+.searchbutton:hover {
+    background: -webkit-linear-gradient( top, #7dc7f5, #5499d9);
+    background: -moz-linear-gradient(top, #7dc7f5, #5499d9);
+    background-color: #468ccf;
+}
+
+.searchbutton:active {
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    -webkit-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    position: relative;
+    top: 1px;
 }

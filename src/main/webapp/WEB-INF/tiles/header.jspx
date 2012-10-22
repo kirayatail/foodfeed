@@ -10,6 +10,6 @@
     
     <form action="${search}" method="GET" class="searchform">
         <input name="query" type="text" class="textform searchinput" placeholder="Search"/>
-        <input type="submit" value="Search" class="button"/>
+        <input type="submit" value="Search" class="searchbutton"/>
     </form>
 </jsp:root>
