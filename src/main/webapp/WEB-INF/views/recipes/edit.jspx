@@ -25,15 +25,15 @@
             <h2>Ingredients</h2>
             <c:forEach items="${recipe.ingredients}" var="ingredient" varStatus="status">
                 <div class="ingredient">
-                    <div>
+                    <div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].grocery.id">Name</form:label>
                         <form:input path="ingredients[${status.index}].grocery.id" class="textform" />
                         <form:errors path="ingredients[${status.index}].grocery.id" element="div" />
-                    </div><div>
+                    </div><div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].amount">Amount</form:label>
                         <form:input path="ingredients[${status.index}].amount" class="textform" />
                         <form:errors path="ingredients[${status.index}].amount" element="div" />
-                    </div><div>
+                    </div><div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].unit">Unit</form:label>
                         <form:input path="ingredients[${status.index}].unit" class="textform" />
                         <form:errors path="ingredients[${status.index}].unit" element="div" />
