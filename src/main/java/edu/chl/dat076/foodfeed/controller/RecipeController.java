@@ -5,6 +5,8 @@ import edu.chl.dat076.foodfeed.model.dao.UserDao;
 import edu.chl.dat076.foodfeed.model.entity.Ingredient;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import edu.chl.dat076.foodfeed.model.entity.User;
+import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
+import edu.chl.dat076.foodfeed.model.flash.FlashType;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for recipes.
@@ -26,10 +29,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/recipes")
 @Transactional
 public class RecipeController {
-    
+
     @Autowired
     private UserDao userDao;
-    
     @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
@@ -64,22 +66,26 @@ public class RecipeController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST, params = "add")
     @Secured("ROLE_USER")
-    public String add(Model model, @Validated Recipe recipe, BindingResult result) {
+    public String add(Model model, @Validated Recipe recipe,
+            BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "recipes/add";
         }
         logger.info("Saving a new recipe.");
-        
+
         User activeUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
-        
-        if(activeUser.getRecipes() == null){
+
+        if (activeUser.getRecipes() == null) {
             activeUser.setRecipes(new ArrayList<Recipe>());
         }
         activeUser.getRecipes().add(recipe);
-        
+
         recipeDao.create(recipe);
         userDao.update(activeUser);
-        
+
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage(
+                "Created recipe " + recipe.getName() + ".", FlashType.INFO));
+
         return "redirect:/recipes/" + recipe.getId();
     }
 
@@ -133,12 +139,15 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "edit")
     @Secured("ROLE_USER")
-    public String edit(Model model, @Validated Recipe recipe, BindingResult result) {
+    public String edit(Model model, @Validated Recipe recipe,
+            BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "recipes/edit";
         }
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
         recipeDao.update(recipe);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage(
+                "Edited recipe " + recipe.getName() + ".", FlashType.INFO));
         return "redirect:/recipes/" + recipe.getId();
     }
 
@@ -159,7 +168,7 @@ public class RecipeController {
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "remove-ingredient")
     @Secured("ROLE_USER")
     public String removeIngredientOnEdit(@ModelAttribute Recipe recipe,
-         @RequestParam("remove-ingredient") int index) {
+            @RequestParam("remove-ingredient") int index) {
         logger.info("Removing ingredient att index " + index + ".");
         recipe.getIngredients().remove(index);
         return "recipes/edit";
