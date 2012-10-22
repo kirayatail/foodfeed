@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.*;
 public class RecipeRestController {
     
     @Autowired
-    private UserDao userDao;
-    
-    @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
             .getLogger(edu.chl.dat076.foodfeed.controller.RecipeController.class);
@@ -39,52 +36,6 @@ public class RecipeRestController {
         logger.info("Listing " + recipes.size() + " recipes.");
         return recipes;
     }
-    
-    /**
-     * Creates a recipe
-     */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestParam("recipe") Recipe recipe) {
-        logger.info("Saving a new recipe.");
-        
-        User activeUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
-        
-        if(activeUser.getRecipes() == null){
-            activeUser.setRecipes(new ArrayList<Recipe>());
-        }
-        activeUser.getRecipes().add(recipe);
-        
-        recipeDao.create(recipe);
-        userDao.update(activeUser);
-    }
-
-    /**
-     * Adds another ingredient to a recipe.
-     */
-    @RequestMapping(value = "/addIn", method = RequestMethod.POST)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addIngredient(@RequestParam("recipe") Recipe recipe) {
-        logger.info("Adding another ingredient.");
-        recipe.getIngredients().add(new Ingredient());
-    }
-
-    /**
-     * Removes an ingredient from a recipe.
-     */
-    @RequestMapping(value = "/addRemIn", method = RequestMethod.POST)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public void removeIngredient(@RequestParam("recipe") Recipe recipe,
-            @RequestParam("remove-ingredient") int index) {
-        logger.info("Removing ingredient att index " + index + ".");
-        recipe.getIngredients().remove(index);
-    }
 
     /**
      * Shows a recipe
@@ -94,18 +45,6 @@ public class RecipeRestController {
     public Recipe show(@PathVariable long id) {
         logger.info("Showing recipe with ID " + id + ".");
         return  recipeDao.find(id);
-    }
-
-    /**
-     * Edits a recipe
-     */
-    @RequestMapping(value = "/{id}/editSave", method = RequestMethod.POST)
-    @Secured("ROLE_USER")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public void edit(@RequestParam("recipe") Recipe recipe) {
-        logger.info("Updating recipe with ID " + recipe.getId() + ".");
-        recipeDao.update(recipe);
     }
 
     /**
