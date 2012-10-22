@@ -27,7 +27,7 @@
                 <div class="ingredient">
                     <div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].grocery.id">Name</form:label>
-                        <form:input path="ingredients[${status.index}].grocery.id" class="textform" />
+                        <form:input path="ingredients[${status.index}].grocery.id" class="textform autocomplete" />
                         <form:errors path="ingredients[${status.index}].grocery.id" element="div" />
                     </div><div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].amount">Amount</form:label>
