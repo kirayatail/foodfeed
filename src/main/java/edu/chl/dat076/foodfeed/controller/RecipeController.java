@@ -1,10 +1,10 @@
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.exception.AccessDeniedException;
-import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
-import edu.chl.dat076.foodfeed.model.flash.FlashType;
 import edu.chl.dat076.foodfeed.model.dao.*;
 import edu.chl.dat076.foodfeed.model.entity.*;
+import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
+import edu.chl.dat076.foodfeed.model.flash.FlashType;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -30,7 +30,6 @@ public class RecipeController {
 
     @Autowired
     private IUserDao userDao;
-    
     @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
@@ -181,7 +180,7 @@ public class RecipeController {
     public String delete(@PathVariable long id, Model model) {
         User authUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
         Recipe recipe = recipeDao.find(id);
-        if(authUser.getRecipes().contains(recipe)){
+        if (authUser.getRecipes().contains(recipe)) {
             authUser.getRecipes().remove(recipe);
             logger.info("Deleting recipe with ID " + id + ".");
             userDao.update(authUser);

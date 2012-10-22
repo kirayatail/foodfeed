@@ -19,12 +19,11 @@
         <put-attribute name="content" value="/WEB-INF/views/home.jspx" />
     </definition>
 
-
     <definition name="recipes/list" extends="base">
         <put-attribute name="title" value="Recipes" />
         <put-attribute name="content" value="/WEB-INF/views/recipes/list.jspx" />
     </definition>
-	
+
     <definition name="recipes/add" extends="base">
         <put-attribute name="title" expression="Add a recipe" />
         <put-attribute name="content" value="/WEB-INF/views/recipes/add.jspx" />
@@ -34,6 +33,7 @@
         <put-attribute name="title" expression="${recipe.name}" />
         <put-attribute name="content" value="/WEB-INF/views/recipes/show.jspx" />
     </definition>
+
     <definition name="recipes/edit" extends="base">
         <put-attribute name="title" expression="Edit ${recipe.name}" />
         <put-attribute name="content" value="/WEB-INF/views/recipes/edit.jspx" />
@@ -43,19 +43,29 @@
         <put-attribute name="title" expression="Log in" />
         <put-attribute name="content" value="/WEB-INF/views/user/login.jspx" />
     </definition>
-    
+ 
     <definition name="user/register" extends="base">
         <put-attribute name="title" expression="Register new user" />
         <put-attribute name="content" value="/WEB-INF/views/user/register.jspx" />
     </definition>
-    
+
     <definition name="user/show" extends="base">
         <put-attribute name="title" expression="${user.username}" />
         <put-attribute name="content" value="/WEB-INF/views/user/show.jspx" />
     </definition>
-    
+
     <definition name="search/result" extends="base">
         <put-attribute name="title" expression="Search for ${query}" />
         <put-attribute name="content" value="/WEB-INF/views/search/result.jspx" />
+    </definition>
+
+    <definition name="error/403" extends="base">
+        <put-attribute name="title" expression="Access denied" />
+        <put-attribute name="content" value="/WEB-INF/views/error/403.jspx" />
+    </definition>
+
+    <definition name="error/404" extends="base">
+        <put-attribute name="title" expression="Page not found" />
+        <put-attribute name="content" value="/WEB-INF/views/error/404.jspx" />
     </definition>
 </tiles-definitions>
