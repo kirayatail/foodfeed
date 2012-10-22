@@ -162,7 +162,8 @@ form #ingredients {
 }
 
 form .ingredient-field {
-    display: inline;
+    float: left;
+    max-width: 30%;
 }
 
 h1, h2, h3 {
@@ -261,4 +262,9 @@ label {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     width: 150px;
+}
+
+.formerror {
+    font-size: 0.75em;
+    color: #CC0000;
 }
