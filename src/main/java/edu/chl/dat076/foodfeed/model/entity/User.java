@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "FoodfeedUser") // User is a reserved keyword in many databases
@@ -15,6 +16,7 @@ public class User implements Serializable, IEntity<String> {
     @Size(min = 1, message = "The username must consist of at least 1 character")
     private String username;
     
+    @JsonIgnore
     @NotNull
     @Size(min = 3, message = "The password must consist of at least 3 characters")
     private String password;

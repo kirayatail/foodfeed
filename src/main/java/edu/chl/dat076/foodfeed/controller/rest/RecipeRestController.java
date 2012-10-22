@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.*;
 public class RecipeRestController {
     
     @Autowired
+    private IUserDao userDao;
+    
+    @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
             .getLogger(edu.chl.dat076.foodfeed.controller.RecipeController.class);

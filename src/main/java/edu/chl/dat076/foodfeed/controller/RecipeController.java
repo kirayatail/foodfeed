@@ -1,7 +1,7 @@
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
-import edu.chl.dat076.foodfeed.model.dao.UserDao;
+import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.entity.Ingredient;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import edu.chl.dat076.foodfeed.model.entity.User;
@@ -31,7 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class RecipeController {
 
     @Autowired
-    private UserDao userDao;
+    private IUserDao userDao;
+    
     @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
