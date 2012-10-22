@@ -94,4 +94,10 @@ public class RecipeDaoTest {
         List<Recipe> result = recipeDao.getByName(recipe.getName());
         Assert.assertFalse("found no recipe", result.isEmpty());
     }
+    
+    @Test
+    public void testGetByPartialName(){
+        List<Recipe> result = recipeDao.getByName("ou");
+        Assert.assertFalse("found no recipe", result.isEmpty());
+    }
 }
