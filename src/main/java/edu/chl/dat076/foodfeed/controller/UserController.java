@@ -1,7 +1,7 @@
 package edu.chl.dat076.foodfeed.controller;
 
 
-import edu.chl.dat076.foodfeed.model.dao.UserDao;
+import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
 import edu.chl.dat076.foodfeed.util.EncoderUtil;
 import org.slf4j.Logger;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     
     @Autowired
-    private UserDao userDao;
+    private IUserDao userDao;
     
 
     private static final Logger logger = LoggerFactory
