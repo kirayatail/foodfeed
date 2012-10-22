@@ -235,3 +235,9 @@ label {
     float: right;
     margin-top: 45px;
 }
+
+.searchinput {
+    -moz-border-radius: 10px;
+     -webkit-border-radius: 10px;
+    width: 150px;
+}
