@@ -15,6 +15,5 @@
         <form:password path="password" class="textform"/><br/>
         <input type="submit" value="Register user" class="button"/>
     </form:form>
-        <p><c:out value="${error}"/> </p>
 
 </jsp:root>
