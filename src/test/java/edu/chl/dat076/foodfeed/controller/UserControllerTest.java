@@ -4,6 +4,7 @@
  */
 package edu.chl.dat076.foodfeed.controller;
 
+import edu.chl.dat076.foodfeed.mock.Model;
 import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.dao.MockUserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
@@ -240,7 +241,7 @@ class Result implements BindingResult {
 
     @Override
     public FieldError getFieldError(String string) {
-        return new FieldError(){
+        return new FieldError(string, string, string) {
             public String getDefaultMessage(){
                 return "OK";
             }
