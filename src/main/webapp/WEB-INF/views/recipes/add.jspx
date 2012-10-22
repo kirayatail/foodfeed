@@ -10,33 +10,33 @@
         <div>
             <form:label path="name">Name</form:label>
             <form:input path="name" class="textform"/>
-            <form:errors path="name" element="div" />
+            <form:errors path="name" element="div" class="formerror"/>
         </div><div>
             <form:label path="description">Description</form:label>
             <form:input path="description" class="textform"/>
-            <form:errors path="description" element="div" />
+            <form:errors path="description" element="div" class="formerror"/>
         </div>
         <div>
             <form:label path="instructions">Instructions</form:label>
             <form:textarea path="instructions" class="textform editable"/>
-            <form:errors path="instructions" element="div" />
+            <form:errors path="instructions" element="div" class="formerror"/>
         </div>
         <div id="ingredients">
             <h2>Ingredients</h2>
             <c:forEach items="${recipe.ingredients}" var="ingredient" varStatus="status">
-                <div class="ingredient">
+                <div class="ingredient clearfix">
                     <div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].grocery.id">Name</form:label>
                         <form:input path="ingredients[${status.index}].grocery.id" class="textform autocomplete" />
-                        <form:errors path="ingredients[${status.index}].grocery.id" element="div" />
+                        <form:errors path="ingredients[${status.index}].grocery.id" class="formerror"/>
                     </div><div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].amount">Amount</form:label>
                         <form:input path="ingredients[${status.index}].amount" class="textform" />
-                        <form:errors path="ingredients[${status.index}].amount" element="div" />
+                        <form:errors path="ingredients[${status.index}].amount" class="formerror"/>
                     </div><div class="ingredient-field">
                         <form:label path="ingredients[${status.index}].unit">Unit</form:label>
                         <form:input path="ingredients[${status.index}].unit" class="textform" />
-                        <form:errors path="ingredients[${status.index}].unit" element="div" />
+                        <form:errors path="ingredients[${status.index}].unit" class="formerror"/>
                     </div>
                     <button name="remove-ingredient" value="${status.index}" class="button">Remove</button>
                 </div>
