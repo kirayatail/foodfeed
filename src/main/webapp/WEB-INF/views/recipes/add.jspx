@@ -38,10 +38,10 @@
                         <form:input path="ingredients[${status.index}].unit" class="textform" />
                         <form:errors path="ingredients[${status.index}].unit" class="formerror"/>
                     </div>
-                    <button name="remove-ingredient" value="${status.index}" class="button">Remove</button>
+                    <button type="submit" name="remove-ingredient" value="${status.index}" class="button remove-ingredient">Remove</button>
                 </div>
             </c:forEach>
-            <input type="submit" name="add-ingredient" value="Add ingredient" class="button"/>
+            <input type="submit" name="add-ingredient" value="Add ingredient" class="button add-ingredient"/>
         </div>
 
         <input type="submit" name="add" value="Create" class="button"/>
