@@ -34,6 +34,6 @@ $(document).ready(function(){
 <button type='submit' class='button remove-ingredient' name='remove-ingredient' value="+counter+">Remove</button>\n\
 </div>";
         
-        $('.ingredient-index-'+counter).append(html);
+        $(html).insertBefore('.add-ingredient');
     });
 });                    
