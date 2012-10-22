@@ -1,5 +1,9 @@
 package edu.chl.dat076.foodfeed.model.flash;
 
+/**
+ * Class for use with Spring flash attributes. Provides a way to show a message
+ * after a redirect in a form submission.
+ */
 public class FlashMessage {
 
     private final String message;

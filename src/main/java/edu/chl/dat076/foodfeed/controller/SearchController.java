@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller that handles searching for recipes.
  */
 package edu.chl.dat076.foodfeed.controller;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 public class SearchController {
 
@@ -27,13 +25,13 @@ public class SearchController {
      * Simply selects the search view to render by returning its name.
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(Model model, @RequestParam(value="query") String query) {
-        
+    public String search(Model model, @RequestParam(value = "query") String query) {
+
         List<Recipe> result = recipeDao.getByName(query);
-        
-        model.addAttribute("query", query);        
+
+        model.addAttribute("query", query);
         model.addAttribute("recipes", result);
-        
+
         return "search/result";
 
     }
