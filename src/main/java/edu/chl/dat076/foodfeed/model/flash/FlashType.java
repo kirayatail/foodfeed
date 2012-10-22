@@ -1,5 +1,8 @@
 package edu.chl.dat076.foodfeed.model.flash;
 
+/**
+ * Enum describing the type of a FlashMessage.
+ */
 public enum FlashType {
 
     INFO("Information", "info"),
