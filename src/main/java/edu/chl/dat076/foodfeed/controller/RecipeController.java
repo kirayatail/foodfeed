@@ -1,12 +1,9 @@
 package edu.chl.dat076.foodfeed.controller;
 
-import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
-import edu.chl.dat076.foodfeed.model.dao.IUserDao;
-import edu.chl.dat076.foodfeed.model.entity.Ingredient;
-import edu.chl.dat076.foodfeed.model.entity.Recipe;
-import edu.chl.dat076.foodfeed.model.entity.User;
 import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
 import edu.chl.dat076.foodfeed.model.flash.FlashType;
+import edu.chl.dat076.foodfeed.model.dao.*;
+import edu.chl.dat076.foodfeed.model.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
