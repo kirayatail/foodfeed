@@ -13,7 +13,8 @@ public class GroceryDao extends AbstractDao<Grocery, String>{
     }
     
     public List<String> getGroceries(String name){
-        TypedQuery<String> res = entityManager.createQuery("select g.id from Grocery g where g.id like :name", String.class);
+        TypedQuery<String> res = entityManager.createQuery("select g.id from Grocery g "
+                + "where lower(g.id) like lower(:name)", String.class);
         res.setParameter("name", "%" + name + "%");
         return res.getResultList();
     }

@@ -31,13 +31,16 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
     }
 
     public List<Recipe> getByGrocery(Grocery g) {
-        TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r left join r.ingredients as i where i.grocery = :grocery)", Recipe.class);
+        TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r "
+                + "left join r.ingredients as i "
+                + "where i.grocery = :grocery)", Recipe.class);
         res.setParameter("grocery", g);
         return res.getResultList();
     }
 
     public List<Recipe> getByName(String name) {
-        TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r where r.name like :name", Recipe.class);
+        TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r "
+                + "where lower(r.name) like lower(:name)", Recipe.class);
         res.setParameter("name", "%" + name + "%");
         return res.getResultList();
     }
