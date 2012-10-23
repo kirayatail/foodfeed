@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+/*
+ * Implements CRUD specific to the entity Grocery
+ */
 @Repository("groceryDao")
 public class GroceryDao extends AbstractDao<Grocery, String>{
     
