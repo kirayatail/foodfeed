@@ -1,11 +1,15 @@
 package edu.chl.dat076.foodfeed.model.dao;
 
+import edu.chl.dat076.foodfeed.controller.rest.GroceryRestController;
 import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import edu.chl.dat076.foodfeed.model.entity.*;
+import edu.chl.dat076.foodfeed.model.service.RecipeService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.*;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,12 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
     "classpath*:spring/security-context.xml"})
 @Transactional
 public class RecipeDaoTest {
-
+    
     @Autowired
     RecipeDao recipeDao;
     
+    @Autowired
+    IUserDao userDao;
+    
     public Recipe recipe;
-
+    
+    public User user;
+    
     /*
      * Creates a Recipe Object to be used in tests
      */
@@ -31,18 +40,29 @@ public class RecipeDaoTest {
         ingredients.add(new Ingredient(new Grocery("Red pepper", "Swedish red pepper"), 2.0, "stycken"));
         ingredients.add(new Ingredient(new Grocery("Water", "Tap water"), 20.0, "liter"));
         
-        Recipe recipe = new Recipe();
-        recipe.setDescription("Best soup in the world");
-        recipe.setName("Soup");
-        recipe.setIngredients(ingredients);
-        recipe.setInstructions("Add all ingredients");
-        return recipe;
+        Recipe testrecipe = new Recipe();
+        testrecipe.setDescription("Best soup in the world");
+        testrecipe.setName("Soup");
+        testrecipe.setIngredients(ingredients);
+        testrecipe.setInstructions("Add all ingredients");
+        return testrecipe;
+    }
+    
+    /*
+     * Creates a User to be used in tests
+     */
+    private User createTestUser(){
+        User testuser = new User("Anders", "hej");
+        return testuser;
     }
     
     @Before
     public void createRecipe(){
         recipe = createTestRecipeObject();
-        recipeDao.create(recipe);
+        user = createTestUser();
+        recipe.setUser(user);
+        user.getRecipes().add(recipe); 
+        userDao.create(user);        
     }
     
     @Test
