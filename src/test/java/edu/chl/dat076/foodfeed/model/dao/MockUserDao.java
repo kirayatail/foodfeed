@@ -8,11 +8,13 @@ import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import edu.chl.dat076.foodfeed.model.entity.User;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author max
  */
+@Repository("userDao")
 public class MockUserDao implements IUserDao{
     
     public List<User> users;
