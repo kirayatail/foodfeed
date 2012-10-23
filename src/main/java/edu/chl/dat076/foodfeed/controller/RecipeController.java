@@ -108,9 +108,14 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable long id, Model model) {
-        logger.info(recipeService.find(id).getId() + " Hej");
         logger.info("Showing recipe with ID " + id + ".");
-        model.addAttribute("recipe", recipeService.find(id));
+        Recipe recipe = recipeService.find(id);
+        model.addAttribute("recipe", recipe);
+        
+        boolean ownedByLoggedInUser = recipe.getUser().getUsername()
+                .equals(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("ownedByLoggedInUser", ownedByLoggedInUser);
+        
         return "recipes/show";
     }
 
