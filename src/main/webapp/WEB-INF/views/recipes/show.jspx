@@ -9,7 +9,7 @@
     <spring:url value="/recipes/{id}/edit" var="editLink">
         <spring:param name="id" value="${recipe.id}" />
     </spring:url>
-    <spring:url value="/recipes/{id}/delete" var="deleteLink">
+    <spring:url value="/recipes/{id}/confirmdelete" var="deleteLink">
         <spring:param name="id" value="${recipe.id}" />
     </spring:url>
     <ul class="actions">

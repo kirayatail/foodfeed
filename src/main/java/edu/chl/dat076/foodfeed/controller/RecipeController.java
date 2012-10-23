@@ -190,4 +190,12 @@ public class RecipeController {
         }
         return "redirect:/recipes";
     }
+    
+    @RequestMapping(value = "/{id}/confirmdelete", method = RequestMethod.GET)
+    @Secured("ROLE_USER")
+    public String confirmDelete(Model model, @PathVariable long id) {        
+        logger.info("Showing confirm delete view");
+        model.addAttribute("recipe", recipeDao.find(id));        
+        return "recipes/confirmdelete";
+    }
 }
