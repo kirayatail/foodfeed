@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 /**
  * Serves Registration and view of user profiles.
  *
@@ -35,11 +33,11 @@ public class UserController {
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr, BindingResult result, RedirectAttributes ra) {
+    public String doRegister(Model model, @Validated User usr, BindingResult result) {
         
         if(result.hasErrors()){
-            ra.addFlashAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
-            return "redirect:register";
+            model.addAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
+            return "user/register";
         } else {
             userDao.create(usr);
             return "redirect:login";
