@@ -29,8 +29,7 @@ public class UserRestController {
     
     
     @RequestMapping(value = "", method = RequestMethod.GET)
-    @ResponseBody // IMPORTANT! declares that the returned object is the ACTUAL thing to return
-                  // and not a reference to a jspx page. JSON will be created through black magic.
+    @ResponseBody
     public List<User> getAll(){
         return userDao.findAll();
     }
