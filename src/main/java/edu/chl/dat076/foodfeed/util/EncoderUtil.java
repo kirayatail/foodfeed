@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.dat076.foodfeed.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-/**
- *
- * @author max
+/*
+ * Help class for encoding password
  */
 public class EncoderUtil {
     
