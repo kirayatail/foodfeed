@@ -301,3 +301,6 @@ label {
     position: relative;
     top: 1px;
 }
+.remove-ingredient {
+    margin-top: 2px;
+}
