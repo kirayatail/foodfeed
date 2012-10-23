@@ -1,9 +1,7 @@
 package edu.chl.dat076.foodfeed.model.service;
 
-import edu.chl.dat076.foodfeed.model.dao.IUserDao;
-import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
-import edu.chl.dat076.foodfeed.model.entity.Recipe;
-import edu.chl.dat076.foodfeed.model.entity.User;
+import edu.chl.dat076.foodfeed.model.dao.*;
+import edu.chl.dat076.foodfeed.model.entity.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

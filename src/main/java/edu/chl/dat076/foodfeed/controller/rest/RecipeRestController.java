@@ -2,14 +2,10 @@ package edu.chl.dat076.foodfeed.controller.rest;
 
 import edu.chl.dat076.foodfeed.model.dao.*;
 import edu.chl.dat076.foodfeed.model.entity.*;
-import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("rs/recipes")
 public class RecipeRestController {
-    
-    @Autowired
-    private IUserDao userDao;
     
     @Autowired
     private RecipeDao recipeDao;
@@ -57,6 +50,6 @@ public class RecipeRestController {
     @ResponseBody
     public void delete(@PathVariable long id) {
         logger.info("Deleting recipe with ID " + id + ".");
-        recipeDao.delete(id);;
+        recipeDao.delete(id);
     }
 }
