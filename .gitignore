@@ -19,3 +19,6 @@ derby.log
 
 # STAN
 .stan
+
+# Mac stuff
+.DS_Store
