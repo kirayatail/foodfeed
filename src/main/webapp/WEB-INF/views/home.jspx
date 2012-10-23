@@ -4,8 +4,9 @@
           xmlns:form="http://www.springframework.org/tags/form"
           xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-    <h1>Hello Recipe!</h1>
+    <h1>Welcome to foodfeed!</h1>
 
+    <p>Foodfeed is a web application for recipe sharing and a place to be inspired by new creative recipes.</p>
     <p>Use menu to browse for recipes or log in to add new recipes.</p>
 
 </jsp:root>
