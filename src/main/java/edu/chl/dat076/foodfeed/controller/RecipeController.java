@@ -2,10 +2,8 @@ package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.exception.AccessDeniedException;
 import edu.chl.dat076.foodfeed.model.entity.*;
-import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
-import edu.chl.dat076.foodfeed.model.flash.FlashType;
-import edu.chl.dat076.foodfeed.model.service.RecipeService;
-import edu.chl.dat076.foodfeed.model.service.UserService;
+import edu.chl.dat076.foodfeed.model.flash.*;
+import edu.chl.dat076.foodfeed.model.service.*;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,3 @@
-/**
- * Controller that handles searching for recipes.
- */
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
@@ -12,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller that handles searching for recipes.
+ */
 @Controller
 public class SearchController {
 
