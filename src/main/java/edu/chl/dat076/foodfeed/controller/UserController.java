@@ -1,10 +1,10 @@
 package edu.chl.dat076.foodfeed.controller;
 
 import edu.chl.dat076.foodfeed.model.entity.User;
-import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
-import edu.chl.dat076.foodfeed.model.flash.FlashType;
+import edu.chl.dat076.foodfeed.model.flash.*;
 import edu.chl.dat076.foodfeed.model.service.UserService;
 import edu.chl.dat076.foodfeed.util.EncoderUtil;
+import javax.servlet.http.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,7 +39,7 @@ public class UserController {
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr, BindingResult result) {
+    public String doRegister(Model model, @Validated User usr, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
         
         if(result.hasErrors()){
             model.addAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
@@ -53,10 +55,13 @@ public class UserController {
             }
             logger.info("Password after DB create: "+usr.getPassword());
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usr.getUsername(), usr.getPassword());
+            
+            token.setDetails(new WebAuthenticationDetails(request));            
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
+            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
             
-            return "redirect:login";
+            return "redirect:../";
         }
     }
 
