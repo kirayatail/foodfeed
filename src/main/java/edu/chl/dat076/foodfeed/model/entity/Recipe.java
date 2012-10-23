@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     private String description;
     @NotNull
     @Size(min = 1, message = "The instructions must consist of at least one character")
+    @Column(length=10000)
     private String instructions;
     @OneToMany(cascade = {CascadeType.ALL})
     @Valid
