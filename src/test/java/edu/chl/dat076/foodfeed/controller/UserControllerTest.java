@@ -9,6 +9,7 @@ import edu.chl.dat076.foodfeed.mock.Result;
 import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.dao.MockUserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
+import edu.chl.dat076.foodfeed.model.service.UserService;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -22,12 +23,14 @@ import org.springframework.test.util.ReflectionTestUtils;
 public class UserControllerTest {
     
     MockUserDao userDao;
+    UserService uService;
     UserController uc;
     Result result;
     Model model;
     
     public UserControllerTest() {
         userDao = new MockUserDao();
+        uService= new UserService();
     }
     
     @Before
@@ -35,7 +38,8 @@ public class UserControllerTest {
         userDao.create(new User("adam", "bertil"));
         userDao.create(new User("bertil", "cesar"));
         uc = new UserController();
-        ReflectionTestUtils.setField(uc, "userDao", userDao, IUserDao.class);
+        ReflectionTestUtils.setField(uService, "userDao", userDao, IUserDao.class);
+        ReflectionTestUtils.setField(uc,"userService", uService, UserService.class);
         result = new Result();
         model = new Model();
     }
