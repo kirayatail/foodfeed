@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Implements CRUD specific to the entity Recipe
  */
 @Repository("recipeDao")
-public class RecipeDao extends AbstractDao<Recipe, Long> {
+public class RecipeDao extends AbstractDao<Recipe, Long> implements IRecipeDao {
 
     RecipeDao() {
         super(Recipe.class);
@@ -33,6 +33,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         super.update(r);
     }
 
+    @Override
     public List<Recipe> getByGrocery(Grocery g) {
         TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r "
                 + "left join r.ingredients as i "
@@ -41,6 +42,7 @@ public class RecipeDao extends AbstractDao<Recipe, Long> {
         return res.getResultList();
     }
 
+    @Override
     public List<Recipe> getByName(String name) {
         TypedQuery<Recipe> res = entityManager.createQuery("select r from Recipe r "
                 + "where lower(r.name) like lower(:name)", Recipe.class);

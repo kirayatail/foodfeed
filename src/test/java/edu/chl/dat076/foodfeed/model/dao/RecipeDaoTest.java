@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecipeDaoTest {
 
     @Autowired
-    RecipeDao recipeDao;
+    IRecipeDao recipeDao;
     @Autowired
     IUserDao userDao;
     public Recipe recipe;
