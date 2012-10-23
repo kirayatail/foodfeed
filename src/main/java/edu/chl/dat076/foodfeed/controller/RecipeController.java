@@ -5,6 +5,7 @@ import edu.chl.dat076.foodfeed.model.dao.*;
 import edu.chl.dat076.foodfeed.model.entity.*;
 import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
 import edu.chl.dat076.foodfeed.model.flash.FlashType;
+import edu.chl.dat076.foodfeed.model.service.RecipeService;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -25,13 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/recipes")
-@Transactional
 public class RecipeController {
 
     @Autowired
     private IUserDao userDao;
     @Autowired
-    private RecipeDao recipeDao;
+    private RecipeService recipeService;
     private static final Logger logger = LoggerFactory
             .getLogger(RecipeController.class);
 
@@ -40,7 +40,7 @@ public class RecipeController {
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String list(Model model) {
-        List<Recipe> recipes = recipeDao.findAll();
+        List<Recipe> recipes = recipeService.findAll();
         logger.info("Listing " + recipes.size() + " recipes.");
         model.addAttribute("recipes", recipes);
         return "recipes/list";
@@ -76,10 +76,8 @@ public class RecipeController {
         if (activeUser.getRecipes() == null) {
             activeUser.setRecipes(new ArrayList<Recipe>());
         }
-        activeUser.getRecipes().add(recipe);
 
-        recipeDao.create(recipe);
-        userDao.update(activeUser);
+        recipeService.create(recipe, activeUser);
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage(
                 "Created recipe " + recipe.getName() + ".", FlashType.INFO));
@@ -116,7 +114,7 @@ public class RecipeController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String show(@PathVariable long id, Model model) {
         logger.info("Showing recipe with ID " + id + ".");
-        model.addAttribute("recipe", recipeDao.find(id));
+        model.addAttribute("recipe", recipeService.find(id));
         return "recipes/show";
     }
 
@@ -126,7 +124,7 @@ public class RecipeController {
     @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
     @Secured("ROLE_USER")
     public String editForm(@PathVariable long id, Model model) {
-        Recipe recipe = recipeDao.find(id);
+        Recipe recipe = recipeService.find(id);
         logger.info("Showing form to edit recipe with ID " + recipe.getId() + ".");
         model.addAttribute("recipe", recipe);
         return "recipes/edit";
@@ -143,7 +141,7 @@ public class RecipeController {
             return "recipes/edit";
         }
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
-        recipeDao.update(recipe);
+        recipeService.update(recipe);
         redirectAttributes.addFlashAttribute("flash", new FlashMessage(
                 "Edited recipe " + recipe.getName() + ".", FlashType.INFO));
         return "redirect:/recipes/" + recipe.getId();
@@ -179,12 +177,12 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String delete(@PathVariable long id, Model model) {
         User authUser = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
-        Recipe recipe = recipeDao.find(id);
+        Recipe recipe = recipeService.find(id);
         if (authUser.getRecipes().contains(recipe)) {
             authUser.getRecipes().remove(recipe);
             logger.info("Deleting recipe with ID " + id + ".");
             userDao.update(authUser);
-            recipeDao.delete(id);
+            recipeService.delete(id);
         } else {
             throw new AccessDeniedException();
         }
@@ -195,7 +193,7 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String confirmDelete(Model model, @PathVariable long id) {        
         logger.info("Showing confirm delete view");
-        model.addAttribute("recipe", recipeDao.find(id));        
+        model.addAttribute("recipe", recipeService.find(id));        
         return "recipes/confirmdelete";
     }
 }
