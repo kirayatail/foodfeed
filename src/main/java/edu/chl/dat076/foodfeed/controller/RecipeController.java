@@ -122,7 +122,7 @@ public class RecipeController {
     /**
      * Form to edit a recipe
      */
-    @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     @Secured("ROLE_USER")
     public String editForm(@PathVariable long id, Model model) {
         Recipe recipe = recipeService.find(id);
