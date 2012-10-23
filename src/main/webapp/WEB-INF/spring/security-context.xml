@@ -18,10 +18,11 @@
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.password.StandardPasswordEncoder" />
 
-    <authentication-manager>
-        <authentication-provider user-service-ref='FfUserDetailsService'>
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="FfUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
+        <authentication-provider user-service-ref="FfUserDetailsService"/> <!-- this provider is used to login user from other system, which has encrypted password. -->
     </authentication-manager>
     
     <beans:bean id="FfUserDetailsService" class="edu.chl.dat076.foodfeed.model.security.FfUserDetailsService" />
