@@ -8,7 +8,11 @@ import edu.chl.dat076.foodfeed.util.EncoderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,10 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    @Qualifier("org.springframework.security.authenticationManager")
+    protected AuthenticationManager authenticationManager;
 
     @Autowired
     private UserService userService;
@@ -43,6 +51,11 @@ public class UserController {
                         "User name already taken, try another.", FlashType.ERROR));
                 return "user/register";
             }
+            logger.info("Password after DB create: "+usr.getPassword());
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usr.getUsername(), usr.getPassword());
+            Authentication auth = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            
             return "redirect:login";
         }
     }
@@ -58,6 +71,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable String id, Model model) {
+
         logger.info("showing user with id: " + id);
         model.addAttribute("user", userService.find(id));
         return "user/show";
