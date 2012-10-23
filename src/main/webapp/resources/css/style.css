@@ -59,7 +59,7 @@ header a{
 
 nav {
     background: -webkit-linear-gradient(top, #dbdbdb, #bcbcbc);
-    background-image: -moz-linear-gradient(top, #dbdbdb, #bcbcbc);
+    background: -moz-linear-gradient(top, #dbdbdb, #bcbcbc);
     border-width: 0 1px 1px;
     font-size: 0.75em;
     padding-left: 1.3em;
@@ -88,7 +88,7 @@ nav a {
 
 nav a:hover{
     background: -webkit-linear-gradient(top, #bebebe, #848484);
-    background-image: -moz-linear-gradient(top, #bebebe, #848484);
+    background: -moz-linear-gradient(top, #bebebe, #848484);
     padding-top: 1em;
     padding-bottom: 1em;
     padding-left: 0.5em;
@@ -221,8 +221,8 @@ label {
     display: inline-block;
     white-space: nowrap;
     background-color: #ccc;
-    background-image: -webkit-linear-gradient(top, #eee, #ccc);
-    background-image: -moz-linear-gradient(top, #eee, #ccc);
+    background: -webkit-linear-gradient(top, #eee, #ccc);
+    background: -moz-linear-gradient(top, #eee, #ccc);
     border: 1px solid #777;
     padding: 0 1.5em;
     margin: 0.5em 0.5em 0.5em 0;
@@ -238,8 +238,8 @@ label {
 
 .button:hover {
     background-color: #ddd;        
-    background-image: -webkit-linear-gradient(top, #fafafa, #ddd);
-    background-image: -moz-linear-gradient(top, #fafafa, #ddd);
+    background: -webkit-linear-gradient(top, #fafafa, #ddd);
+    background: -moz-linear-gradient(top, #fafafa, #ddd);
 }
 
 .button:active {
@@ -273,13 +273,11 @@ label {
 .searchbutton {
     -moz-box-shadow: inset 0px 1px 0px 0px #8bb0c7;
     -webkit-box-shadow: inset 0px 1px 0px 0px #8bb0c7;
-    box-shadow: inset 0px 1px 0px 0px #8bb0c7;
     background: -webkit-linear-gradient( top, #63b8ee, #468ccf);
     background: -moz-linear-gradient(top, #63b8ee, #468ccf);
     background-color: #63b8ee;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
-    border-radius: 2px;
     border: 1px solid #3866a3;
     display: inline-block;
     color: #ffffff;
