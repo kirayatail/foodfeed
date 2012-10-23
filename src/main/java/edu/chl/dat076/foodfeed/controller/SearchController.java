@@ -1,6 +1,6 @@
 package edu.chl.dat076.foodfeed.controller;
 
-import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
+import edu.chl.dat076.foodfeed.model.dao.IRecipeDao;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
 import org.slf4j.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class SearchController {
 
     @Autowired
-    private RecipeDao recipeDao;
+    private IRecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
             .getLogger(SearchController.class);
 
