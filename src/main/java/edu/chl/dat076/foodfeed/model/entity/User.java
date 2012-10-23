@@ -1,6 +1,7 @@
 package edu.chl.dat076.foodfeed.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,9 +26,11 @@ public class User implements Serializable, IEntity<String> {
     private List<Recipe> recipes;
 
     public User() {
+        this.recipes = new ArrayList<>();
     }
 
     public User(String username, String password) {
+        this();
         this.username = username;
         this.password = password;
     }
