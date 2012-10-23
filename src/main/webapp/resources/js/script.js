@@ -5,8 +5,6 @@ function handleRem(button){
     
     if($('.ingredient').length > 1){
         $('.ingredient-index-'+at).remove();
-        
-        alert("in if");
 
         for(var i=at; i<counter; i++){
             $('.ingredient-index-'+(parseInt(i)+1)).attr("class", 'ingredient clearfix ingredient-index-'+i);
