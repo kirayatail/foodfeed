@@ -20,8 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Handles requests for recipes.
  */
+
 @Controller
 @RequestMapping("/recipes")
+@SessionAttributes("recipe")
 public class RecipeController {
 
     @Autowired
@@ -134,7 +136,7 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "edit")
     @Secured("ROLE_USER")
-    public String edit(Model model, @Validated Recipe recipe,
+    public String edit(Model model, @ModelAttribute Recipe recipe,
             BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "recipes/edit";
