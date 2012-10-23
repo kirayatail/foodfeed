@@ -1,4 +1,3 @@
-
 package edu.chl.dat076.foodfeed.model.entity;
 
 import java.io.Serializable;
@@ -9,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -19,7 +20,7 @@ public class Recipe implements IEntity<Long>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @NotNull
     @Size(min = 1, message = "The name must consist of at least one character")
     private String name;
@@ -32,7 +33,11 @@ public class Recipe implements IEntity<Long>, Serializable {
     @OneToMany(cascade = {CascadeType.ALL})
     @Valid
     private List<Ingredient> ingredients;
-    
+    // Bidirectional relationship to simlify code.
+    @ManyToOne
+    @JoinColumn(name="user_username", nullable=false)
+    private User user;
+
     public Recipe() {
         this.ingredients = new ArrayList<>();
     }
@@ -43,7 +48,7 @@ public class Recipe implements IEntity<Long>, Serializable {
         this.instructions = instructions;
         this.ingredients = ingredients;
     }
-    
+
     @Override
     public Long getId() {
         return id;
@@ -69,7 +74,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public String getInstructions() {
         return instructions;
     }
@@ -77,7 +82,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     public void setInstructions(String instructions) {
         this.instructions = instructions;
     }
-       
+
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -85,12 +90,20 @@ public class Recipe implements IEntity<Long>, Serializable {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-    
+
     public int getIngredientCount() {
         if (this.ingredients != null) {
             return ingredients.size();
         } else {
             return 0;
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
