@@ -77,9 +77,12 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable String id, Model model) {
-
-        logger.info("showing user with id: " + id);
+        logger.info("showing user with id: " + id);        
+        User usr = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        
         model.addAttribute("user", userService.find(id));
+        model.addAttribute("recipes", usr.getRecipes());
+        
         return "user/show";
     }
 
