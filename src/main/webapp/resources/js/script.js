@@ -52,7 +52,7 @@ $(document).ready(function(){
         var html = "<div class='ingredient clearfix ingredient-index-"+counter+"'>"
         + "<div class='ingredient-field'>"
         + "<label class='grocery-label-"+counter+"' for='ingredients"+counter+".grocery.id'>Name</label>"
-        + "<input id='ingredients"+counter+".grocery.id' class='textform autocomplete ui-autocomplete-input' type='text' value='' name='ingredients["+counter+"].grocery.id' autocomplete='off'>"
+        + "<input id='ingredients"+counter+".grocery.id' class='textform autocomplete' type='text' value='' name='ingredients["+counter+"].grocery.id'>"
         + "<span class='ui-helper-hidden-accessible' role='status' aria-live='polite'></span>"
         + "</div><div class='ingredient-field'>"
         + "<label class='amount-label-"+counter+"' for='ingredients"+counter+".amount'>Amount</label>"
@@ -65,6 +65,11 @@ $(document).ready(function(){
         + "</div>";
         
         $(html).insertBefore('.add-ingredient');
+        
+        $('.autocomplete').autocomplete({
+            source: "/foodfeed/grocery",
+            minLength: 2
+        });
         
         $('.remove-index-'+counter).click(function(event){
             event.preventDefault();
