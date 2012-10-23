@@ -60,7 +60,10 @@ public class UserControllerTest {
     
     @Test
     public void testRegisterUser(){
-        result.
+        User usr = new User("test", "hemligt");
+        uc.doRegister(model, usr, result);
+        
+        Assert.assertTrue("User exists in DAO", userDao.users.contains(usr));
     }
     
     @Test
