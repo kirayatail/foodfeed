@@ -19,6 +19,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
     private Long id;
     @NotNull
     @Valid
+    @ManyToOne
     private Grocery grocery;
     @Min(value = 0, message = "Value must be positive")
     @NotNull
