@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * Serves Registration and view of user profiles.
  *
@@ -111,17 +112,22 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-    public String doEdit(Model model, User user) {
-
-        String oldPass = (String) model.asMap().get("oldPass");
-
-        if (EncoderUtil.encode(oldPass).equals(user.getPassword())) {
-            String newPass = (String) model.asMap().get("newPass");
+    public String doEdit(Model model, @RequestParam("newPass") String newPass, @RequestParam("oldPass") String oldPass, RedirectAttributes ra) {
+        
+        
+        User user = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        logger.info("Trying to set new password for user "+user.getId());
+        if(EncoderUtil.matches(oldPass, user.getPassword())){
+            logger.info("Encoded oldPass was the same as stored hash, setting password");
             user.setPassword(EncoderUtil.encode(newPass));
+            
+            userService.update(user);
+            
+            ra.addFlashAttribute("flash", new FlashMessage("Password was updated", FlashType.INFO));
+            return "redirect:/user";
+        } else {
+            model.addAttribute("flash", new FlashMessage("Confirmation password was not correct", FlashType.ERROR));
+            return "user/edit";
         }
-
-        userService.update(user);
-
-        return null;
     }
 }

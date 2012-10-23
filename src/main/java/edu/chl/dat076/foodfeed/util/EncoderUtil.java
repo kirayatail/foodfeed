@@ -18,4 +18,8 @@ public class EncoderUtil {
     public static String encode(String input){
         return encoder.encode(input);
     }
+    
+    public static boolean matches(String raw, String encoded){
+        return encoder.matches(raw, encoded);
+    }
 }
