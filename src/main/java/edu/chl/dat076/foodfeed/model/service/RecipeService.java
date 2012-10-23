@@ -24,9 +24,8 @@ public class RecipeService {
     }
 
     public void create(Recipe recipe, User user) {
+        recipe.setUser(user);
         user.getRecipes().add(recipe);
-        recipeDao.create(recipe);
-        userDao.update(user);
     }
 
     public Recipe find(long id) {
@@ -37,11 +36,10 @@ public class RecipeService {
         recipeDao.update(recipe);
     }
 
-    public void delete(long id) {
-        recipeDao.delete(id);
+    public void delete(Recipe recipe) {
+        User user = recipe.getUser();
+        user.getRecipes().remove(recipe);
+        userDao.update(user);
+        recipeDao.delete(recipe);
     }
-    
-    
-    
-    
 }

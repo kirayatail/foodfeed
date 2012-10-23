@@ -17,6 +17,12 @@
         <li><a href="${deleteLink}">Delete</a></li>
     </ul>
 
+    <spring:url value="/user/{id}" var="userLink">
+        <spring:param name="id" value="${recipe.user.id}" />
+    </spring:url>
+
+    <p><em>Created by <a href="${userLink}">${recipe.user.id}</a></em></p>
+
     <p>${recipe.description}</p>
     
     <p>${recipe.instructions}</p>
@@ -30,5 +36,7 @@
             </li>
         </c:forEach>
     </ul>
+    
+    <h2>Instructions</h2>
 
 </jsp:root>

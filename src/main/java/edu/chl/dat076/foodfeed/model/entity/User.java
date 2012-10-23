@@ -22,7 +22,7 @@ public class User implements Serializable, IEntity<String> {
     @Size(min = 3, message = "The password must consist of at least 3 characters")
     private String password;
     
-    @OneToMany(cascade= CascadeType.ALL)
+    @OneToMany(cascade= CascadeType.ALL, mappedBy="user")
     private List<Recipe> recipes;
 
     public User() {
