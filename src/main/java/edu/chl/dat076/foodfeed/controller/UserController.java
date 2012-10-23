@@ -1,5 +1,6 @@
 package edu.chl.dat076.foodfeed.controller;
 
+import edu.chl.dat076.foodfeed.exception.ResourceNotFoundException;
 import edu.chl.dat076.foodfeed.model.entity.User;
 import edu.chl.dat076.foodfeed.model.flash.*;
 import edu.chl.dat076.foodfeed.model.service.UserService;
@@ -61,7 +62,7 @@ public class UserController {
             SecurityContextHolder.getContext().setAuthentication(auth);
             request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
             
-            return "redirect:../";
+            return "redirect:../"; 
         }
     }
 
@@ -97,6 +98,32 @@ public class UserController {
     public String loginForm() {
         logger.info("Showing form to log in.");
         return "user/login";
+    }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String doLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass, HttpServletRequest request){
+        User cand;
+        try{
+            cand = userService.find(username);
+        } catch(ResourceNotFoundException exc) {
+            model.addAttribute("flash", new FlashMessage("User does not exist", FlashType.ERROR));
+            return "user/login";
+        }
+        
+        if(!EncoderUtil.matches(pass, cand.getPassword())){
+            // No match!
+            model.addAttribute("flash", new FlashMessage("Wrong password", FlashType.ERROR));
+            return "user/login";
+        } else {
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, pass);
+            
+            token.setDetails(new WebAuthenticationDetails(request));            
+            Authentication auth = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+            
+            return "redirect:../"; 
+        }
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
