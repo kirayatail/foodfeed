@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/*
+ * Implements general CRUD for all entities
+ */
 public abstract class AbstractDao<T, ID extends Serializable> implements
         EntityDao<T, ID> {
 

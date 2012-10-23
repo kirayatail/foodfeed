@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+/*
+ * Implements CRUD specific to the entity Recipe
+ */
 @Repository("recipeDao")
 public class RecipeDao extends AbstractDao<Recipe, Long> {
 
