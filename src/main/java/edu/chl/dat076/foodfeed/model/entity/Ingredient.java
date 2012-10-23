@@ -10,9 +10,6 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 /**
  * Specifies a separate ingredient to be used in relation to recipes.
- *
- * TODO: Connect to some kind of quantity in order to ease conversions between
- * units.
  */
 @Entity
 public class Ingredient implements IEntity<Long>, Serializable {

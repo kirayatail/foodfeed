@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
-@Table(name = "FoodfeedUser") // User is a reserved keyword in many databases
+@Table(name = "FoodfeedUser")
 public class User implements Serializable, IEntity<String> {
 
     @Id
