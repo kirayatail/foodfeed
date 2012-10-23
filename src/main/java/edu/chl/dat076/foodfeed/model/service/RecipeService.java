@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/*
+ * A help class for communication between recipeDao and recipeController
+ */
 @Service("recipeService")
 @Transactional
 public class RecipeService {
