@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 /**
  * Serves Registration and view of user profiles.
  *
@@ -33,7 +34,6 @@ public class UserController {
     @Autowired
     @Qualifier("org.springframework.security.authenticationManager")
     protected AuthenticationManager authenticationManager;
-
     @Autowired
     private UserService userService;
     private static final Logger logger = LoggerFactory
@@ -41,8 +41,8 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String doRegister(Model model, @Validated User usr, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
-        
-        if(result.hasErrors()){
+
+        if (result.hasErrors()) {
             model.addAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
             return "user/register";
 
@@ -54,15 +54,15 @@ public class UserController {
                         "User name already taken, try another.", FlashType.ERROR));
                 return "user/register";
             }
-            logger.info("Password after DB create: "+usr.getPassword());
+            logger.info("Password after DB create: " + usr.getPassword());
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usr.getUsername(), usr.getPassword());
-            
-            token.setDetails(new WebAuthenticationDetails(request));            
+
+            token.setDetails(new WebAuthenticationDetails(request));
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
             request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-            
-            return "redirect:../"; 
+
+            return "redirect:../";
         }
     }
 
@@ -99,30 +99,30 @@ public class UserController {
         logger.info("Showing form to log in.");
         return "user/login";
     }
-    
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String doLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass, HttpServletRequest request){
+    public String doLogin(Model model, @RequestParam("username") String username, @RequestParam("password") String pass, HttpServletRequest request) {
         User cand;
-        try{
+        try {
             cand = userService.find(username);
-        } catch(ResourceNotFoundException exc) {
+        } catch (ResourceNotFoundException exc) {
             model.addAttribute("flash", new FlashMessage("User does not exist", FlashType.ERROR));
             return "user/login";
         }
-        
-        if(!EncoderUtil.matches(pass, cand.getPassword())){
+
+        if (!EncoderUtil.matches(pass, cand.getPassword())) {
             // No match!
             model.addAttribute("flash", new FlashMessage("Wrong password", FlashType.ERROR));
             return "user/login";
         } else {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, pass);
-            
-            token.setDetails(new WebAuthenticationDetails(request));            
+
+            token.setDetails(new WebAuthenticationDetails(request));
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
             request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-            
-            return "redirect:../"; 
+
+            return "redirect:../";
         }
     }
 
@@ -139,16 +139,16 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
     public String doEdit(Model model, @RequestParam("newPass") String newPass, @RequestParam("oldPass") String oldPass, RedirectAttributes ra) {
-        
-        
+
+
         User user = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
-        logger.info("Trying to set new password for user "+user.getId());
-        if(EncoderUtil.matches(oldPass, user.getPassword())){
+        logger.info("Trying to set new password for user " + user.getId());
+        if (EncoderUtil.matches(oldPass, user.getPassword())) {
             logger.info("Encoded oldPass was the same as stored hash, setting password");
             user.setPassword(EncoderUtil.encode(newPass));
-            
+
             userService.update(user);
-            
+
             ra.addFlashAttribute("flash", new FlashMessage("Password was updated", FlashType.INFO));
             return "redirect:/user";
         } else {

@@ -9,18 +9,16 @@ import org.springframework.stereotype.Repository;
  * Implements CRUD specific to the entity Grocery
  */
 @Repository("groceryDao")
-public class GroceryDao extends AbstractDao<Grocery, String>{
-    
-    public GroceryDao(){
+public class GroceryDao extends AbstractDao<Grocery, String> {
+
+    public GroceryDao() {
         super(Grocery.class);
     }
-    
-    public List<String> getGroceries(String name){
+
+    public List<String> getGroceries(String name) {
         TypedQuery<String> res = entityManager.createQuery("select g.id from Grocery g "
                 + "where lower(g.id) like lower(:name)", String.class);
         res.setParameter("name", "%" + name + "%");
         return res.getResultList();
     }
-    
-    
 }

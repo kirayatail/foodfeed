@@ -35,7 +35,7 @@ public class Recipe implements IEntity<Long>, Serializable {
     private List<Ingredient> ingredients;
     // Bidirectional relationship to simlify code.
     @ManyToOne
-    @JoinColumn(name="user_username", nullable=false)
+    @JoinColumn(name = "user_username", nullable = false)
     private User user;
 
     public Recipe() {

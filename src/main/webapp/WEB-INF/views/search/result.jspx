@@ -4,9 +4,9 @@
           xmlns:form="http://www.springframework.org/tags/form"
           xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-          
+
     <h1>Search result for ${query}</h1>
-    
+
     <c:forEach items="${recipes}" var="recipe">
         <article>
             <spring:url value="/recipes/{id}" var="recipeLink">
@@ -16,6 +16,6 @@
             <p>${recipe.description}</p>
         </article>
     </c:forEach>
-    
-    
+
+
 </jsp:root>

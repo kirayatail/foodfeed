@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-
 /**
  * Handles requests for recipes.
  */
 @Controller
 @RequestMapping("rs/recipes")
 public class RecipeRestController {
-    
+
     @Autowired
     private RecipeDao recipeDao;
     private static final Logger logger = LoggerFactory
@@ -40,7 +39,7 @@ public class RecipeRestController {
     @ResponseBody
     public Recipe show(@PathVariable long id) {
         logger.info("Showing recipe with ID " + id + ".");
-        return  recipeDao.find(id);
+        return recipeDao.find(id);
     }
 
     /**

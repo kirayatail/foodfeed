@@ -12,8 +12,8 @@
     <ul class="actions">
         <li><a href="${editLink}">Edit</a></li>
     </ul>
-        <h2>Recipes</h2>
-        <c:forEach items="${recipes}" var="recipe">
+    <h2>Recipes</h2>
+    <c:forEach items="${recipes}" var="recipe">
         <article>
             <spring:url value="/recipes/{id}" var="recipeLink">
                 <spring:param name="id" value="${recipe.id}" />

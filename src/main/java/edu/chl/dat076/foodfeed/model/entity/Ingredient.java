@@ -22,7 +22,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
     private Grocery grocery;
     @Min(value = 0, message = "Value must be positive")
     @NotNull
-    @NumberFormat(style= Style.NUMBER)
+    @NumberFormat(style = Style.NUMBER)
     private Double amount;
     private String unit;
 
@@ -69,7 +69,7 @@ public class Ingredient implements IEntity<Long>, Serializable {
     public void setUnit(String unit) {
         this.unit = unit;
     }
-    
+
     public String getName() {
         return this.grocery.getId();
     }

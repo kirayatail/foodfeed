@@ -24,56 +24,55 @@ import org.springframework.transaction.annotation.Transactional;
     "classpath*:spring/security-context.xml"})
 @Transactional
 public class UserDaoTest {
-    
+
     @Autowired
     UserDao userDao;
-    
     public User user;
 
     /*
      * Creates a User Object to be used in tests
      */
-    private User createTestUserObject(){
+    private User createTestUserObject() {
         return new User("Admin", "testpass");
     }
-    
+
     @Before
-    public void createUser(){
+    public void createUser() {
         user = createTestUserObject();
         userDao.create(user);
     }
-    
+
     @Test
-    public void testCreate(){
+    public void testCreate() {
         Assert.assertNotNull("recipe could not be created", user.getId());
     }
-    
+
     @Test(expected = ResourceNotFoundException.class)
-    public void testDelete(){
+    public void testDelete() {
         userDao.delete(user);
         Assert.assertNull("recipe removed", userDao.find(user.getId()));
     }
-    
+
     @Test(expected = ResourceNotFoundException.class)
-    public void testDeleteID(){
+    public void testDeleteID() {
         userDao.delete(user.getId());
         Assert.assertNull("recipe not removed", userDao.find(user.getId()));
     }
-    
+
     @Test
-    public void testFind(){
+    public void testFind() {
         User result = userDao.find(user.getId());
         Assert.assertNotNull("recipe not found", result);
     }
-    
+
     @Test
     public void testFindAll() {
         List<User> users = userDao.findAll();
         Assert.assertFalse("Check that true is true", users.isEmpty());
     }
-    
+
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         User old = new User();
         old.setId(user.getId());
         user.setId("New name");

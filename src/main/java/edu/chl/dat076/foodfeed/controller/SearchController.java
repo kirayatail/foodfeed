@@ -27,7 +27,7 @@ public class SearchController {
     public String search(Model model, @RequestParam(value = "query") String query) {
 
         List<Recipe> result = recipeDao.getByName(query);
-        
+
         logger.info("Searching for a recipe");
 
         model.addAttribute("query", query);
