@@ -6,9 +6,8 @@
 
     <h1>${user.username}</h1>
 
-    <!-- The edit page is not implemented, should offer to change password? -->
     <spring:url value="/user/{id}/edit" var="editLink">
-        <spring:param name="username" value="${user.username}" />
+        <spring:param name="id" value="${user.username}" />
     </spring:url>
     <ul class="actions">
         <li><a href="${editLink}">Edit</a></li>

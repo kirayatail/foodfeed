@@ -6,18 +6,16 @@
 
     <h1>Change password for ${user.username}</h1>
 
-    <form:form commandName="user">
+    <form method="POST">
         <div>
-            <form:label path="newPass">New password</form:label>
-            <form:password path="newPass" class="textform"/>
-            <form:errors path="newPass" element="div" />
+            <label for="newPass">New password</label>
+            <input type="password" name="newPass" class="textform"/>
         </div>
         <div>
-            <form:label path="oldPass">Old password</form:label>
-            <form:password path="oldPass" class="textform"/>
-            <form:errors path="oldPass" element="div" />
+            <label for="oldPass">Old password</label>
+            <input type="password" name="oldPass" class="textform"/>
         </div>
         <input type="submit" name="edit" value="Update" class="button"/>
-    </form:form>
+    </form>
 
 </jsp:root>
