@@ -44,6 +44,15 @@ $(document).ready(function(){
         
         var at = $this.attr("value");
         
-        //TODO: code for actual remove here
+        for(var i=at; i>counter; i++){
+            $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
+            $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
+            
+            $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount.id');
+            $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
+            
+            $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit.id');
+            $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
+        }
     });
 });                    
