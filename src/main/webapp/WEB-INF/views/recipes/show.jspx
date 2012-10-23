@@ -6,16 +6,18 @@
 
     <h1>${recipe.name}</h1>
 
-    <spring:url value="/recipes/{id}/edit" var="editLink">
-        <spring:param name="id" value="${recipe.id}" />
-    </spring:url>
-    <spring:url value="/recipes/{id}/confirmdelete" var="deleteLink">
-        <spring:param name="id" value="${recipe.id}" />
-    </spring:url>
-    <ul class="actions">
-        <li><a href="${editLink}">Edit</a></li>
-        <li><a href="${deleteLink}">Delete</a></li>
-    </ul>
+    <c:if test="${ownedByLoggedInUser}">
+        <spring:url value="/recipes/{id}/edit" var="editLink">
+            <spring:param name="id" value="${recipe.id}" />
+        </spring:url>
+        <spring:url value="/recipes/{id}/confirmdelete" var="deleteLink">
+            <spring:param name="id" value="${recipe.id}" />
+        </spring:url>
+        <ul class="actions">
+            <li><a href="${editLink}">Edit</a></li>
+            <li><a href="${deleteLink}">Delete</a></li>
+        </ul>
+    </c:if>
 
     <spring:url value="/user/{id}" var="userLink">
         <spring:param name="id" value="${recipe.user.id}" />
@@ -24,8 +26,6 @@
     <p><em>Created by <a href="${userLink}">${recipe.user.id}</a></em></p>
 
     <p>${recipe.description}</p>
-    
-    <p>${recipe.instructions}</p>
 
     <h2>Ingredients</h2>
     <ul>
@@ -36,7 +36,9 @@
             </li>
         </c:forEach>
     </ul>
-    
+
     <h2>Instructions</h2>
 
+    
+    ${recipe.instructions}
 </jsp:root>
