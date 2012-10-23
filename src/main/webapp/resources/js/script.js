@@ -31,8 +31,14 @@ $(document).ready(function(){
 <label for='ingredients"+counter+".unit'>Unit</label>\n\
 <input id='ingredients"+counter+".unit' class='textform' type='text' value='' name='ingredients["+counter+"].unit'>\n\
 </div>\n\
-<button type='submit' class='button remove-ingredient' name='remove-ingredient' value="+counter+">Remove</button>\n\
+<button type='submit' class='button remove-ingredient remove-index-"+counter+"' name='remove-ingredient' value="+counter+">Remove</button>\n\
 </div>";
+        
+        $('.remove-index-'+counter).click(function(event){
+            event.preventDefault();
+        
+            handleRem($this);
+        });
         
         $(html).insertBefore('.add-ingredient');
     });
@@ -40,27 +46,31 @@ $(document).ready(function(){
     $(".remove-ingredient").click(function(event){
         event.preventDefault();
         
-        counter = $('.ingredient').length;
-        
-        var at = $this.attr("value");
-        
-        $('.ingredient-index-'+at).remove();
-        
-        for(var i=at; i>counter; i++){
-            $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
-            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("name", 'ingredients'+i+'].grocery.id');
-            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("id", 'ingredients'+i+'.grocery.id');
-            $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
-            
-            $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount');
-            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("name", 'ingredients'+i+'].amount');
-            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("id", 'ingredients'+i+'.amount');
-            $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
-            
-            $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit');
-            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("name", 'ingredients'+i+'].unit');
-            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("id", 'ingredients'+i+'.unit');
-            $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
-        }
+        handleRem($this);
     });
-});                    
+});
+
+function handleRem(button){
+    counter = $('.ingredient').length;
+        
+    var at = button.attr("value");
+        
+    $('.ingredient-index-'+at).remove();
+        
+    for(var i=at; i>counter; i++){
+        $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
+        $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("name", 'ingredients'+i+'].grocery.id');
+        $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("id", 'ingredients'+i+'.grocery.id');
+        $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
+            
+        $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount');
+        $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("name", 'ingredients'+i+'].amount');
+        $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("id", 'ingredients'+i+'.amount');
+        $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
+            
+        $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit');
+        $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("name", 'ingredients'+i+'].unit');
+        $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("id", 'ingredients'+i+'.unit');
+        $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
+    }
+}
