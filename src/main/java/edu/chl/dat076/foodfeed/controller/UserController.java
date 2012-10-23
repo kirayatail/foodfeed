@@ -1,14 +1,14 @@
 package edu.chl.dat076.foodfeed.controller;
 
-
-import edu.chl.dat076.foodfeed.model.dao.IUserDao;
 import edu.chl.dat076.foodfeed.model.entity.User;
 import edu.chl.dat076.foodfeed.model.flash.FlashMessage;
 import edu.chl.dat076.foodfeed.model.flash.FlashType;
+import edu.chl.dat076.foodfeed.model.service.UserService;
 import edu.chl.dat076.foodfeed.util.EncoderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,29 +23,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-@Transactional
 @RequestMapping("/user")
 public class UserController {
-    
-    @Autowired
-    private IUserDao userDao;
-    
 
+    @Autowired
+    private UserService userService;
     private static final Logger logger = LoggerFactory
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String doRegister(Model model, @Validated User usr, BindingResult result, RedirectAttributes ra) {
-        
-        if(result.hasErrors()){
+
+        if (result.hasErrors()) {
             ra.addFlashAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
             return "redirect:register";
         } else {
-            userDao.create(usr);
+            try {
+                userService.create(usr);
+            } catch (DataIntegrityViolationException e) {
+                model.addAttribute("flash", new FlashMessage(
+                        "User name already taken, try another.", FlashType.ERROR));
+                return "user/register";
+            }
             return "redirect:login";
         }
-        
-
     }
 
     /*
@@ -59,19 +60,19 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable String id, Model model) {
-        logger.info("showing user with id: "+id);
-        model.addAttribute("user", userDao.find(id));
+        logger.info("showing user with id: " + id);
+        model.addAttribute("user", userService.find(id));
         return "user/show";
     }
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String show(Model model){
-        logger.info("showing the authenticated user");        
-        User usr = userDao.find(SecurityContextHolder.getContext().getAuthentication().getName());
-        
+    public String show(Model model) {
+        logger.info("showing the authenticated user");
+        User usr = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+
         model.addAttribute("user", usr);
         model.addAttribute("recipes", usr.getRecipes());
-        
+
         return "user/show";
     }
 
@@ -80,32 +81,30 @@ public class UserController {
         logger.info("Showing form to log in.");
         return "user/login";
     }
-    
-    @RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
-    public String getEditForm(@PathVariable String id, Model model){
-        User user = userDao.find(id);
-        
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public String getEditForm(@PathVariable String id, Model model) {
+        User user = userService.find(id);
+
         model.addAttribute("newPass", new String());
         model.addAttribute("oldPass", new String());
         model.addAttribute("user", user);
-        
+
         return "user/edit";
     }
-    
-    
-    @RequestMapping(value="/{id}/edit", method = RequestMethod.POST)
-    public String doEdit(Model model, User user){
-        
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    public String doEdit(Model model, User user) {
+
         String oldPass = (String) model.asMap().get("oldPass");
-        
-        if(EncoderUtil.encode(oldPass).equals(user.getPassword())) {
+
+        if (EncoderUtil.encode(oldPass).equals(user.getPassword())) {
             String newPass = (String) model.asMap().get("newPass");
             user.setPassword(EncoderUtil.encode(newPass));
         }
-        
-        userDao.update(user);
-        
+
+        userService.update(user);
+
         return null;
     }
-            
 }
