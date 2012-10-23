@@ -44,14 +44,22 @@ $(document).ready(function(){
         
         var at = $this.attr("value");
         
+        $('.ingredient-index-'+at).remove();
+        
         for(var i=at; i>counter; i++){
             $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
+            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("name", 'ingredients'+i+'].grocery.id');
+            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("id", 'ingredients'+i+'.grocery.id');
             $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
             
-            $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount.id');
+            $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount');
+            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("name", 'ingredients'+i+'].amount');
+            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("id", 'ingredients'+i+'.amount');
             $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
             
-            $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit.id');
+            $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit');
+            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("name", 'ingredients'+i+'].unit');
+            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("id", 'ingredients'+i+'.unit');
             $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
         }
     });
