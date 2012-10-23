@@ -38,6 +38,11 @@
         <put-attribute name="title" expression="Edit ${recipe.name}" />
         <put-attribute name="content" value="/WEB-INF/views/recipes/edit.jspx" />
     </definition>
+    
+    <definition name="recipes/confirmdelete" extends="base">
+        <put-attribute name="title" expression="Confirm delete for ${recipe.name}" />
+        <put-attribute name="content" value="/WEB-INF/views/recipes/confirmdelete.jspx" />
+    </definition>
 
     <definition name="user/login" extends="base">
         <put-attribute name="title" expression="Log in" />
