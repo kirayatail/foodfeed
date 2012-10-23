@@ -10,7 +10,11 @@
         <spring:param name="id" value="${user.username}" />
     </spring:url>
     <ul class="actions">
+        <c:if test="${showOptions}">
+            <!-- Links for editing user related stuff goes here -->
         <li><a href="${editLink}">Edit</a></li>
+        
+        </c:if>
     </ul>
     <h2>Recipes</h2>
     <c:forEach items="${recipes}" var="recipe">

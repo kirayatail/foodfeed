@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,20 +79,36 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String showById(@PathVariable String id, Model model) {
 
+
         logger.info("showing user with id: " + id);        
-        User usr = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        User usr = userService.find(id);
         
+
+        boolean showOptions = false;
+        
+        try{
+            User loggedInUser = getLoggedInUser();
+            showOptions = loggedInUser.getId().equals(id);
+        } catch(ResourceNotFoundException exc) {
+            // that's OK, user may not be logged in.
+        }
+        
+        
+        logger.info("showing user with id: " + id);
+        model.addAttribute("showOptions", showOptions);
         model.addAttribute("user", userService.find(id));
         model.addAttribute("recipes", usr.getRecipes());
         
         return "user/show";
     }
-
+    
+    @Secured("ROLE_USER")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String show(Model model) {
         logger.info("showing the authenticated user");
-        User usr = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
-
+        User usr = getLoggedInUser();
+        
+        model.addAttribute("showOptions", true);
         model.addAttribute("user", usr);
         model.addAttribute("recipes", usr.getRecipes());
 
@@ -129,23 +146,25 @@ public class UserController {
             return "redirect:../";
         }
     }
-
-    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String getEditForm(@PathVariable String id, Model model) {
-        User user = userService.find(id);
-
+        User user = getLoggedInUser();
+        
         model.addAttribute("newPass", new String());
         model.addAttribute("oldPass", new String());
         model.addAttribute("user", user);
 
         return "user/edit";
     }
-
-    @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
+    
+    @Secured("ROLE_USER")
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String doEdit(Model model, @RequestParam("newPass") String newPass, @RequestParam("oldPass") String oldPass, RedirectAttributes ra) {
 
 
-        User user = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = getLoggedInUser();
         logger.info("Trying to set new password for user " + user.getId());
         if (EncoderUtil.matches(oldPass, user.getPassword())) {
             logger.info("Encoded oldPass was the same as stored hash, setting password");
@@ -159,5 +178,9 @@ public class UserController {
             model.addAttribute("flash", new FlashMessage("Confirmation password was not correct", FlashType.ERROR));
             return "user/edit";
         }
+    }
+    
+    private User getLoggedInUser() throws ResourceNotFoundException {
+        return userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }
