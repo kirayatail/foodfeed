@@ -19,7 +19,7 @@ public class GroceryDaoTest {
     @Autowired
     GroceryDao groceryDao;
     public Grocery grocery;
-    
+
     /*
      * Creates a Grocery Object to be used in tests
      */
@@ -33,15 +33,15 @@ public class GroceryDaoTest {
         grocery = createTestRecipeObject();
         groceryDao.create(grocery);
     }
-    
+
     @Test
-    public void getGroceries(){
+    public void getGroceries() {
         List<String> result = groceryDao.getGroceries(grocery.getId());
         Assert.assertTrue("List is not empty", !result.isEmpty());
     }
-    
+
     @Test
-    public void getGroceriesWithPartialName(){
+    public void getGroceriesWithPartialName() {
         List<String> result = groceryDao.getGroceries("at");
         Assert.assertTrue("List is not empty", !result.isEmpty());
     }

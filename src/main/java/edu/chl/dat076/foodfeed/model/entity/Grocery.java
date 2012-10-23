@@ -7,16 +7,14 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Grocery implements IEntity<String>, Serializable {
-        
+
     @Id
     @NotNull
-    @Size(min=1, message="Needs to be at least one character long.")
+    @Size(min = 1, message = "Needs to be at least one character long.")
     private String id;
-        
     private String description;
 
     public Grocery() {
-    
     }
 
     public Grocery(String id, String description) {

@@ -39,6 +39,6 @@
 
     <h2>Instructions</h2>
 
-    
+
     ${recipe.instructions}
 </jsp:root>

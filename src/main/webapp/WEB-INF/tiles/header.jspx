@@ -7,7 +7,7 @@
     <!-- <a href="${headerLink}"></a>   -->
 
     <spring:url value="/search" var="search"/>
-    
+
     <form action="${search}" method="GET" class="searchform">
         <input name="query" type="text" class="textform searchinput" placeholder="Search"/>
         <input type="submit" value="Search" class="searchbutton"/>

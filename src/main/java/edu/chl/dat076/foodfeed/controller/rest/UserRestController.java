@@ -15,28 +15,26 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Rest controller for users.
- * 
+ *
  */
 @Controller
 @RequestMapping("rs/user")
 public class UserRestController {
-    
+
     @Autowired
     private IUserDao userDao;
-    
     private static final Logger logger = LoggerFactory
             .getLogger(UserRestController.class);
-    
-    
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userDao.findAll();
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public User getByID(@PathVariable String id){
+    public User getByID(@PathVariable String id) {
         return userDao.find(id);
     }
 }

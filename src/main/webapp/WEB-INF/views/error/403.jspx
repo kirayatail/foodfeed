@@ -5,7 +5,7 @@
           xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
     <h1>Access denied</h1>
-    
+
     <p>
         Try logging in if not logged in.
         Otherwise you're somewhere you're not supposed to!

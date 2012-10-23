@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * REST controller for groceries.
- * 
+ *
  */
 @Controller
 public class GroceryRestController {

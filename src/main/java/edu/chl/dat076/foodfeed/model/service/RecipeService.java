@@ -13,10 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("recipeService")
 @Transactional
 public class RecipeService {
-    
+
     @Autowired
     private RecipeDao recipeDao;
-    
     @Autowired
     private IUserDao userDao;
 

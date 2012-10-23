@@ -50,19 +50,19 @@ $(document).ready(function(){
         counter = $(".ingredient").length;
         
         var html = "<div class='ingredient clearfix ingredient-index-"+counter+"'>"
-                    + "<div class='ingredient-field'>"
-                    + "<label class='grocery-label-"+counter+"' for='ingredients"+counter+".grocery.id'>Name</label>"
-                    + "<input id='ingredients"+counter+".grocery.id' class='textform autocomplete ui-autocomplete-input' type='text' value='' name='ingredients["+counter+"].grocery.id' autocomplete='off'>"
-                    + "<span class='ui-helper-hidden-accessible' role='status' aria-live='polite'></span>"
-                    + "</div><div class='ingredient-field'>"
-                    + "<label class='amount-label-"+counter+"' for='ingredients"+counter+".amount'>Amount</label>"
-                    + "<input id='ingredients"+counter+".amount' class='textform' type='text' value='' name='ingredients["+counter+"].amount'>"
-                    + "</div><div class='ingredient-field'>"
-                    + "<label class='unit-label-"+counter+"' for='ingredients"+counter+".unit'>Unit</label>"
-                    + "<input id='ingredients"+counter+".unit' class='textform' type='text' value='' name='ingredients["+counter+"].unit'>"
-                    + "</div>"
-                    + "<button type='submit' class='button remove-ingredient remove-index-"+counter+"' name='remove-ingredient' value="+counter+">Remove</button>"
-                    + "</div>";
+        + "<div class='ingredient-field'>"
+        + "<label class='grocery-label-"+counter+"' for='ingredients"+counter+".grocery.id'>Name</label>"
+        + "<input id='ingredients"+counter+".grocery.id' class='textform autocomplete ui-autocomplete-input' type='text' value='' name='ingredients["+counter+"].grocery.id' autocomplete='off'>"
+        + "<span class='ui-helper-hidden-accessible' role='status' aria-live='polite'></span>"
+        + "</div><div class='ingredient-field'>"
+        + "<label class='amount-label-"+counter+"' for='ingredients"+counter+".amount'>Amount</label>"
+        + "<input id='ingredients"+counter+".amount' class='textform' type='text' value='' name='ingredients["+counter+"].amount'>"
+        + "</div><div class='ingredient-field'>"
+        + "<label class='unit-label-"+counter+"' for='ingredients"+counter+".unit'>Unit</label>"
+        + "<input id='ingredients"+counter+".unit' class='textform' type='text' value='' name='ingredients["+counter+"].unit'>"
+        + "</div>"
+        + "<button type='submit' class='button remove-ingredient remove-index-"+counter+"' name='remove-ingredient' value="+counter+">Remove</button>"
+        + "</div>";
         
         $(html).insertBefore('.add-ingredient');
         
