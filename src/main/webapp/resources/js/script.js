@@ -1,3 +1,30 @@
+function handleRem(button){
+    counter = $('.ingredient').length;
+        
+    var at = button.value;
+    
+    if($('.ingredient').length > 1){
+        $('.ingredient-index-'+at).remove();
+
+        for(var i=at; i>counter; i++){
+            $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
+            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("name", 'ingredients'+i+'].grocery.id');
+            $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("id", 'ingredients'+i+'.grocery.id');
+            $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
+
+            $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount');
+            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("name", 'ingredients'+i+'].amount');
+            $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("id", 'ingredients'+i+'.amount');
+            $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
+
+            $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit');
+            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("name", 'ingredients'+i+'].unit');
+            $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("id", 'ingredients'+i+'.unit');
+            $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
+        }
+    }
+}
+
 Aloha.settings.sidebar = {
     disabled: true 
 }
@@ -34,43 +61,18 @@ $(document).ready(function(){
 <button type='submit' class='button remove-ingredient remove-index-"+counter+"' name='remove-ingredient' value="+counter+">Remove</button>\n\
 </div>";
         
+        $(html).insertBefore('.add-ingredient');
+        
         $('.remove-index-'+counter).click(function(event){
             event.preventDefault();
         
-            handleRem($this);
+            handleRem(event.target);
         });
-        
-        $(html).insertBefore('.add-ingredient');
     });
     
     $(".remove-ingredient").click(function(event){
         event.preventDefault();
         
-        handleRem($this);
+        handleRem(event.target);
     });
 });
-
-function handleRem(button){
-    counter = $('.ingredient').length;
-        
-    var at = button.attr("value");
-        
-    $('.ingredient-index-'+at).remove();
-        
-    for(var i=at; i>counter; i++){
-        $('.ingredient-field .grocery-label-'+(i+1)).attr("for", 'ingredients'+i+'.grocery.id');
-        $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("name", 'ingredients'+i+'].grocery.id');
-        $('.ingredient-field #ingredients'+(i+1)+'.grocery.id').attr("id", 'ingredients'+i+'.grocery.id');
-        $('.ingredient-field .grocery-label-'+(i+1)).attr("class", 'grocery-label-'+i);
-            
-        $('.ingredient-field .amount-label-'+(i+1)).attr("for", 'ingredients'+i+'.amount');
-        $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("name", 'ingredients'+i+'].amount');
-        $('.ingredient-field #ingredients'+(i+1)+'.amount').attr("id", 'ingredients'+i+'.amount');
-        $('.ingredient-field .amount-label-'+(i+1)).attr("class", 'amount-label-'+i);
-            
-        $('.ingredient-field .unit-label-'+(i+1)).attr("for", 'ingredients'+i+'.unit');
-        $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("name", 'ingredients'+i+'].unit');
-        $('.ingredient-field #ingredients'+(i+1)+'.unit').attr("id", 'ingredients'+i+'.unit');
-        $('.ingredient-field .unit-label-'+(i+1)).attr("class", 'unit-label-'+i);
-    }
-}
