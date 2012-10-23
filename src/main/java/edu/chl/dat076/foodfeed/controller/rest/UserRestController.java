@@ -35,7 +35,7 @@ public class UserRestController {
         return userDao.findAll();
     }
     
-    @RequestMapping(value = "/name/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getByID(@PathVariable String id){
         return userDao.find(id);
