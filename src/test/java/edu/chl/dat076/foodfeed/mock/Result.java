@@ -15,8 +15,8 @@ import org.springframework.validation.ObjectError;
  */
 public class Result implements BindingResult {
     
-    public String field;
-    public String message;
+    public boolean hasErrors;
+    
 
     @Override
     public Object getTarget() {
@@ -130,7 +130,7 @@ public class Result implements BindingResult {
 
     @Override
     public boolean hasErrors() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.hasErrors;
     }
 
     @Override
@@ -200,7 +200,11 @@ public class Result implements BindingResult {
 
     @Override
     public FieldError getFieldError(String string) {
-        return new FieldError(string, string, string);
+        return new FieldError(string, string, string) {
+            public String getDefaultMessage(){
+                return "OK";
+            }
+        };
     }
 
     @Override
