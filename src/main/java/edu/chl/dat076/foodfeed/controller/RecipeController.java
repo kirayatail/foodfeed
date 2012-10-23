@@ -15,12 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for recipes.
  */
-
 @Controller
 @RequestMapping("/recipes")
 @SessionAttributes("recipe")
@@ -111,11 +111,11 @@ public class RecipeController {
         logger.info("Showing recipe with ID " + id + ".");
         Recipe recipe = recipeService.find(id);
         model.addAttribute("recipe", recipe);
-        
+
         boolean ownedByLoggedInUser = recipe.getUser().getUsername()
                 .equals(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("ownedByLoggedInUser", ownedByLoggedInUser);
-        
+
         return "recipes/show";
     }
 
@@ -126,6 +126,7 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String editForm(@PathVariable long id, Model model) {
         Recipe recipe = recipeService.find(id);
+        checkOwnership(recipe);
         logger.info("Showing form to edit recipe with ID " + recipe.getId() + ".");
         model.addAttribute("recipe", recipe);
         return "recipes/edit";
@@ -138,6 +139,7 @@ public class RecipeController {
     @Secured("ROLE_USER")
     public String edit(Model model, @ModelAttribute Recipe recipe,
             BindingResult result, RedirectAttributes redirectAttributes) {
+        checkOwnership(recipe);
         if (result.hasErrors()) {
             return "recipes/edit";
         }
@@ -179,13 +181,10 @@ public class RecipeController {
     public String delete(@PathVariable long id, Model model) {
         User authUser = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
         Recipe recipe = recipeService.find(id);
-        if (authUser.getRecipes().contains(recipe)) {
-            authUser.getRecipes().remove(recipe);
-            logger.info("Deleting recipe with ID " + id + ".");
-            recipeService.delete(recipe);
-        } else {
-            throw new AccessDeniedException();
-        }
+        checkOwnership(recipe);
+        authUser.getRecipes().remove(recipe);
+        logger.info("Deleting recipe with ID " + id + ".");
+        recipeService.delete(recipe);
         return "redirect:/recipes";
     }
 
@@ -195,5 +194,20 @@ public class RecipeController {
         logger.info("Showing confirm delete view");
         model.addAttribute("recipe", recipeService.find(id));
         return "recipes/confirmdelete";
+    }
+
+    /**
+     * Check that a user owns a recipe
+     */
+    private void checkOwnership(Recipe recipe) {
+        try {
+            User user = userService.find(SecurityContextHolder.getContext().getAuthentication().getName());
+            if (!recipe.getUser().equals(user)) {
+                throw new AccessDeniedException();
+            }
+        } catch (ResourceAccessException e) {
+            // This means user is not logged in
+            throw new AccessDeniedException();
+        }
     }
 }
