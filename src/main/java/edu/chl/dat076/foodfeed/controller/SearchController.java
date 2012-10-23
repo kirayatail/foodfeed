@@ -6,8 +6,7 @@ package edu.chl.dat076.foodfeed.controller;
 import edu.chl.dat076.foodfeed.model.dao.RecipeDao;
 import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +27,8 @@ public class SearchController {
     public String search(Model model, @RequestParam(value = "query") String query) {
 
         List<Recipe> result = recipeDao.getByName(query);
+        
+        logger.info("Searching for a recipe");
 
         model.addAttribute("query", query);
         model.addAttribute("recipes", result);
