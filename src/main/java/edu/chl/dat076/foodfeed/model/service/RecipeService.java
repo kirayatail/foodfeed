@@ -25,7 +25,7 @@ public class RecipeService {
 
     public void create(Recipe recipe, User user) {
         recipe.setUser(user);
-        user.getRecipes().add(recipe);
+        recipeDao.create(recipe);
     }
 
     public Recipe find(long id) {
