@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/recipes")
-@SessionAttributes("recipe")
 public class RecipeController {
 
     @Autowired
@@ -137,13 +136,15 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "edit")
     @Secured("ROLE_USER")
-    public String edit(Model model, @ModelAttribute Recipe recipe,
+    public String edit(Model model, @Validated Recipe recipe, @PathVariable long id,
             BindingResult result, RedirectAttributes redirectAttributes) {
-        checkOwnership(recipe);
+        Recipe oldRecipe = recipeService.find(id);
+        checkOwnership(oldRecipe);
         if (result.hasErrors()) {
             return "recipes/edit";
         }
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
+        recipe.setUser(oldRecipe.getUser());
         recipeService.update(recipe);
         redirectAttributes.addFlashAttribute("flash", new FlashMessage(
                 "Edited recipe " + recipe.getName() + ".", FlashType.INFO));
