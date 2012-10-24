@@ -136,13 +136,13 @@ public class RecipeController {
      */
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.POST, params = "edit")
     @Secured("ROLE_USER")
-    public String edit(Model model, @Validated Recipe recipe, @PathVariable long id,
-            BindingResult result, RedirectAttributes redirectAttributes) {
-        Recipe oldRecipe = recipeService.find(id);
-        checkOwnership(oldRecipe);
+    public String edit(Model model, @Validated Recipe recipe, BindingResult result,
+    @PathVariable long id, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "recipes/edit";
         }
+        Recipe oldRecipe = recipeService.find(id);
+        checkOwnership(oldRecipe);
         logger.info("Updating recipe with ID " + recipe.getId() + ".");
         recipe.setUser(oldRecipe.getUser());
         recipeService.update(recipe);
