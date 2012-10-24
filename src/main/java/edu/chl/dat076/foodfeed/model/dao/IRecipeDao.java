@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.chl.dat076.foodfeed.model.dao;
 
 import edu.chl.dat076.foodfeed.model.entity.Grocery;
@@ -9,8 +5,8 @@ import edu.chl.dat076.foodfeed.model.entity.Recipe;
 import java.util.List;
 
 /**
- *
- * @author max
+ * Interface for RecipeDao which prepares for mocking this type in a future
+ * test context.
  */
 public interface IRecipeDao extends EntityDao<Recipe, Long> {
 
