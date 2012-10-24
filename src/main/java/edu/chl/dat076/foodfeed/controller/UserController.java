@@ -151,7 +151,7 @@ public class UserController {
     
     @Secured("ROLE_USER")
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String getEditForm(@PathVariable String id, Model model) {
+    public String getEditForm(Model model) {
         User user = getLoggedInUser();
         
         model.addAttribute("newPass", new String());

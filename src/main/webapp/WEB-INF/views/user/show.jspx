@@ -6,9 +6,7 @@
 
     <h1>${user.username}</h1>
 
-    <spring:url value="/user/{id}/edit" var="editLink">
-        <spring:param name="id" value="${user.username}" />
-    </spring:url>
+    <spring:url value="/user/edit" var="editLink" />
     <ul class="actions">
         <c:if test="${showOptions}">
             <!-- Links for editing user related stuff goes here -->
