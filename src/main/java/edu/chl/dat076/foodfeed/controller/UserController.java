@@ -41,7 +41,7 @@ public class UserController {
             .getLogger(UserController.class);
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String doRegister(Model model, @Validated User usr, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
+    public String doRegister(Model model, @Validated User usr, BindingResult result, HttpServletRequest request, HttpServletResponse response, RedirectAttributes ra) {
 
         if (result.hasErrors()) {
             model.addAttribute("flash", new FlashMessage((result.getFieldError().getDefaultMessage()), FlashType.ERROR));
@@ -62,7 +62,9 @@ public class UserController {
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
             request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-
+            
+            ra.addFlashAttribute("flash", new FlashMessage("You were automatically logged in", FlashType.INFO));
+            
             return "redirect:../";
         }
     }
@@ -149,7 +151,7 @@ public class UserController {
     
     @Secured("ROLE_USER")
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String getEditForm(@PathVariable String id, Model model) {
+    public String getEditForm(Model model) {
         User user = getLoggedInUser();
         
         model.addAttribute("newPass", new String());
