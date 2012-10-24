@@ -57,9 +57,10 @@ public class RecipeDaoTest {
     public void createRecipe() {
         recipe = createTestRecipeObject();
         user = createTestUser();
+        userDao.create(user);
         recipe.setUser(user);
         user.getRecipes().add(recipe);
-        userDao.create(user);
+        recipeDao.create(recipe);
     }
 
     @Test
